@@ -6,7 +6,7 @@
 #    By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/07 18:36:31 by jjuntune          #+#    #+#              #
-#    Updated: 2022/06/16 18:19:52 by jjuntune         ###   ########.fr        #
+#    Updated: 2022/07/25 14:46:20 by jjuntune         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,11 @@ FT_LIBRERY = src/libft/libft.a
 src_files = $(addprefix $(src_dir), main.c \
 					vector_functions.c \
 					sphere_intersection.c \
-					Image_render.c)
+					cylinder_intersection.c\
+					cone_intersection.c\
+					Image_render.c \
+					check_shadow.c \
+					plane_intersection.c)
 
 obj_files = $(subst $(src_dir), $(build_dir), $(src_files:.c=.o))
 

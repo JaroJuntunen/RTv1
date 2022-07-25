@@ -6,38 +6,61 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:28:21 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/06/16 19:31:29 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/07/22 15:52:50 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RTv1.h"
+#include <stdio.h>
 
-double	*t_calculate(double	*t, t_vector *abc)
-{
-	double	temp_a;
-	double	temp_b;
-	double	temp_c;
 
-	temp_a = (abc->y * -1);
-	temp_b = ((abc->y * abc->y) - (4 * (abc->x + abc->z)));
-	temp_c = 2 * abc->x;
-	if (temp_b >= 0)
-	{
-		t[0] = ((temp_a - sqrt(temp_b)) / temp_c);
-		t[1] = ((temp_a + sqrt(temp_b)) / temp_c);
-	}
-	return (t);
-}
-
-double	*sphere_Intersection(t_vector *ray, t_RTv *RTv , int count)
+double	sphere_intersection(t_ray *ray, t_rtv *rtv , int count)
 {
 	double		t[2];
-	t_vector 	w;
-	t_vector 	abc;
+	t_vector	w;
+	double		discr;
+	double		b;
+	double		ret;
 
-	w = minus_vectors(&RTv->camera, &RTv->shape[count].pos);
-	abc.x = (ray->x * ray->x);
-	abc.y = (2 * ray->y * w.y);
-	abc.z = ((w.z * w.z) - (RTv->shape[count].r * RTv->shape[count].r));
-	return (t_calculate(t, &abc));
+	w = minus_vectors(ray->start, rtv->shape[count].pos);
+	b = (2 * m_a_vector(ray->dir, w));
+	discr = ((b * b) - (4 * m_a_vector(ray->dir , ray->dir)
+		* (m_a_vector(w , w) - (rtv->shape[count].r * rtv->shape[count].r))));
+	if (discr >= 0)
+	{
+		discr = sqrt(discr);
+		t[0] = (-b + discr) / (2 * m_a_vector(w , w));
+		t[1] = (-b - discr) / (2 * m_a_vector(w ,w));
+		if (t[0] > t[1] && t[0] > (double)0)
+			ret = t[0];
+		else
+			ret = t[1];
+	}
+	else
+		ret = -1.0f;
+	return (ret);
+}
+
+int	shadow_sphere_intersection(t_ray *ray, t_rtv *rtv , int count)
+{
+	double		t[2];
+	t_vector	w;
+	double		discr;
+	double		b;
+
+
+	w = minus_vectors(ray->start, rtv->light.pos);
+
+	b = (2 * m_a_vector(ray->dir, w));
+	discr = ((b * b) - (4 * m_a_vector(ray->dir , ray->dir)
+		* (m_a_vector(w , w) - (rtv->shape[count].r * rtv->shape[count].r))));
+	if (discr >= 0)
+	{
+		discr = sqrt(discr);
+		t[0] = (-b + discr) / (2 * m_a_vector(w , w));
+		t[1] = (-b - discr) / (2 * m_a_vector(w , w));
+		if (t[0] > t[1] && t[0] > (double)0 && t[1] > (double)0)
+			return (1);
+	}
+	return (0);
 }
