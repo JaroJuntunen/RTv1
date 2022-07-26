@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:36:07 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/07/25 13:21:40 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/07/26 15:41:52 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@
 # include <mlx.h>
 # include <fcntl.h>
 # include <math.h>
+# include <stdio.h>
 # include "../build/libsdl2/include/SDL2/SDL.h"
 
 # define WIN_W 1000
 # define WIN_H 700
-# define MAX_SHAPES 10
+# define MAX_SHAPES 100
 
 typedef struct s_vector
 {
@@ -32,7 +33,7 @@ typedef struct s_vector
 
 typedef struct s_shape
 {
-	char		type;
+	char		*type;
 	t_vector	pos;
 	t_vector	cyl_h;
 	double		r;
@@ -90,6 +91,7 @@ void		render_image(t_rtv	*rtv);
 double		sphere_intersection(t_ray *ray, t_rtv *rtv , int count);
 double		cylinder_intersection(t_ray *ray, t_rtv *rtv , int count);
 double		plane_intersection(t_ray *ray, t_rtv *rtv , int count);
+double		cone_intersection(t_ray *ray, t_rtv *rtv , int count);
 
 int			shadow_sphere_intersection(t_ray *ray, t_rtv *rtv , int count);
 #endif

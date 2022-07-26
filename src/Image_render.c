@@ -6,12 +6,11 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 12:52:35 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/07/25 13:18:35 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:04:30 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RTv1.h"
-#include <stdio.h>
 
 int		get_color(double ret, t_rtv *rtv, int count)
 {
@@ -47,20 +46,22 @@ int	ray_shooter(t_ray *ray,t_rtv *rtv)
 	count = 0;
 	while (count < rtv->shape_count)
 	{
-		if (rtv->shape[count].type == 's')
+		if (ft_strcmp(rtv->shape[count].type, "sphere") == 0)
 			ret = sphere_intersection(ray, rtv, count);
-		else if (rtv->shape[count].type == 'c')
+		else if (ft_strcmp(rtv->shape[count].type, "cylinder") == 0)
 			ret = cylinder_intersection(ray, rtv, count);
-		else if (rtv->shape[count].type == 'p')
+		else if (ft_strcmp(rtv->shape[count].type, "plane") == 0)
 			ret = plane_intersection(ray, rtv, count);
+		else if (ft_strcmp(rtv->shape[count].type, "cone") == 0)
+			ret = cone_intersection(ray, rtv, count);
 		if (count == 0)
 		{
 			rtv->clo_shape = count;
 			rtv->clo_ret = ret;
 		}
-		else if (ret != -1)
+		else if (ret > 0)
 		{
-			if (rtv->clo_ret == -1 || ret > rtv->clo_ret)
+			if (rtv->clo_ret == -1 || ret < rtv->clo_ret)
 			{
 				rtv->clo_shape = count;
 				rtv->clo_ret = ret;

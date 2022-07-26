@@ -6,12 +6,11 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 18:45:46 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/07/22 15:53:43 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/07/26 15:48:48 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RTv1.h"
-#include <stdio.h>
 
 
 //	C = Point at the center of the base of the cylinder
@@ -44,9 +43,9 @@ double	cylinder_intersection(t_ray *ray, t_rtv *rtv , int count)
 	if (discr >= 0)
 	{
 		discr = sqrt(discr);
-		t[0] = (-abc.y + discr) / (2 * m_a_vector(w , w));
-		t[1] = (-abc.y - discr) / (2 * m_a_vector(w ,w));
-		if (t[0] > t[1] && t[0] > (double)0)
+		t[0] = (-abc.y + discr) / (2 * abc.x);
+		t[1] = (-abc.y - discr) / (2 * abc.x);
+		if (t[0] < t[1] && t[0] > (double)0)
 			return (t[0]);
 		else
 			return (t[1]);

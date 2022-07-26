@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 19:19:11 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/07/20 10:44:01 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/07/26 12:51:15 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		check_shadow(t_ray *ray, t_rtv *rtv)
 {
 	float len;
-	int		i;
+	//int		i;
 
 	rtv->clo_shape = 0;
 	ray->start.x = (ray->dir.x / rtv->clo_ret);
@@ -29,23 +29,6 @@ int		check_shadow(t_ray *ray, t_rtv *rtv)
 	ray->dir.y /= len;
 	ray->dir.z /= len;
 	//printf("%f, %f, %f\n",ray->dir.x, ray->dir.y, ray->dir.z);
-	if (rtv->shape[rtv->clo_shape].type == 's')
-	{
-		i = shadow_sphere_intersection(ray, rtv, rtv->clo_shape);
-		if (i == 1)
-			return (0);
-	}
-	else if (rtv->shape[rtv->clo_shape].type == 'c')
-	{
-		i = shadow_sphere_intersection(ray, rtv, rtv->clo_shape);
-		if (i == 1)
-			return (0);
-	}
-	else if (rtv->shape[rtv->clo_shape].type == 'p')
-	{
-		i = shadow_sphere_intersection(ray, rtv, rtv->clo_shape);
-		if (i == 1)
-			return (0);
-	}
+
 	return (1);
 }
