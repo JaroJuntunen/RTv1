@@ -1,0 +1,7 @@
+sphere 0.0.10 1 0xff000000
+sphere 0.1.10 1 0xff00ff00
+cone 0.10.10 0.0.10 1,2 0x0000ff00
+cone 10.0.10 0.0.10 1,2 0xff000000
+plane 0.0.50 0.0.1 0xffffff00
+plane 0.0.50 0.0.1 0xffffff00
+light 0.0.0

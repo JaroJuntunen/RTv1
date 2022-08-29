@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:36:09 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/07/26 16:08:04 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/08/29 19:29:58 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	rtv_loop_and_exit(t_rtv	*rtv)
 	}
 	SDL_DestroyWindow(rtv->win);
 	free(rtv->frame_buffer.data);
+	free(rtv->shape);
 }
 
 void	draw_to_window(t_rtv *rtv)
@@ -66,133 +67,49 @@ int		create_rtv_struct(t_rtv	*rtv)
 		return (0);
 	rtv->frame_buffer.data_len = (WIN_H * WIN_W);
 	rtv->frame_buffer.data = (int *)malloc(sizeof(int) * rtv->frame_buffer.data_len);
-	
-	
 	rtv->camera.x = 0.0;
 	rtv->camera.y = 0.0;
 	rtv->camera.z = 0.0;
-
-	rtv->shape[0].type = "cone";
-	rtv->shape[0].pos.x = 0.0;
-	rtv->shape[0].pos.y = 10.0;
-	rtv->shape[0].pos.z = 1000.0;
-	rtv->shape[0].cyl_h.x = 0.0;
-	rtv->shape[0].cyl_h.y = 0.0;
-	rtv->shape[0].cyl_h.z = 1000.0;
-	rtv->shape[0].color = 0xf880f00;
-	rtv->shape[0].r = 3;
-	
-	rtv->shape[1].type = "sphere";
-	rtv->shape[1].pos.x = 0.0;
-	rtv->shape[1].pos.y = 0.0;
-	rtv->shape[1].pos.z = 1000.0;
-	rtv->shape[1].color = 0xff000000;
-	rtv->shape[1].r = 5.0;
-	
-	rtv->shape[2].type = "sphere";
-	rtv->shape[2].pos.x = 1.00;
-	rtv->shape[2].pos.y = 0.00;
-	rtv->shape[2].pos.z = -90.0;
-	rtv->shape[2].color = 0xffff0000;
-	rtv->shape[2].r = 1.0;
-	
-	rtv->shape[3].type = "cylinder";
-	rtv->shape[3].pos.x = -10.0;
-	rtv->shape[3].pos.y = 2.0;
-	rtv->shape[3].pos.z = 0.0;
-	rtv->shape[3].cyl_h.x = -0.40;
-	rtv->shape[3].cyl_h.y = 0.0;
-	rtv->shape[3].cyl_h.z = 1000.0;
-	rtv->shape[3].r = 0.60;
-	rtv->shape[3].color = 0x0000ff00;
-	
-	rtv->shape[4].type = "cylinder";
-	rtv->shape[4].pos.x = 10.0;
-	rtv->shape[4].pos.y = 2.0;
-	rtv->shape[4].pos.z = 0.0;
-	rtv->shape[4].cyl_h.x = 0.40;
-	rtv->shape[4].cyl_h.y = 0.0;
-	rtv->shape[4].cyl_h.z = 1000.0;
-	rtv->shape[4].r = 0.60;
-	rtv->shape[4].color = 0x00ffff00;
-	
-	rtv->shape[5].type = "cylinder";
-	rtv->shape[5].pos.x = 0.0;
-	rtv->shape[5].pos.y = -10.0;
-	rtv->shape[5].pos.z = 0.0;
-	rtv->shape[5].cyl_h.x = 0.0;
-	rtv->shape[5].cyl_h.y = -1.0;
-	rtv->shape[5].cyl_h.z = 1000.0;
-	rtv->shape[5].r = 0.60;
-	rtv->shape[5].color = 0xffff0000;
-	
-	rtv->shape[6].type = "cyliner";
-	rtv->shape[6].pos.x = 0.0;
-	rtv->shape[6].pos.y = 0.0;
-	rtv->shape[6].pos.z = 1000.0;
-	rtv->shape[6].cyl_h.x = 1.0;
-	rtv->shape[6].cyl_h.y = 10.0;
-	rtv->shape[6].cyl_h.z = 1000.0;
-	rtv->shape[6].r = 0.050;
-	rtv->shape[6].color = 0x0000ff00;
-	
-	rtv->shape[7].type = "plane";
-	rtv->shape[7].pos.x = 50.0;
-	rtv->shape[7].pos.y = 0.00;
-	rtv->shape[7].pos.z = 1000.0;
-	rtv->shape[7].cyl_h.x = 1.0;
-	rtv->shape[7].cyl_h.y = 0.0;
-	rtv->shape[7].cyl_h.z = 0.0;
-	rtv->shape[7].color = 0xff00ff00;
-	
-	rtv->shape[8].type = "plane";
-	rtv->shape[8].pos.x = -50.0;
-	rtv->shape[8].pos.y = 0.00;
-	rtv->shape[8].pos.z = 1000.0;
-	rtv->shape[8].cyl_h.x = 1.0;
-	rtv->shape[8].cyl_h.y = 0.0;
-	rtv->shape[8].cyl_h.z = 0.0;
-	rtv->shape[8].color = 0x0ff0ff00;
-	
-	rtv->shape[9].type = "plane";
-	rtv->shape[9].pos.x = 0.0;
-	rtv->shape[9].pos.y = 50.00;
-	rtv->shape[9].pos.z = 1000.0;
-	rtv->shape[9].cyl_h.x = 0.0;
-	rtv->shape[9].cyl_h.y = -1.0;
-	rtv->shape[9].cyl_h.z = 0.0;
-	rtv->shape[9].color = 0x00ab0ff00;
-	
-	rtv->shape[10].type = "plane";
-	rtv->shape[10].pos.x = 0.0;
-	rtv->shape[10].pos.y = -50.00;
-	rtv->shape[10].pos.z = 1000.0;
-	rtv->shape[10].cyl_h.x = 0.0;
-	rtv->shape[10].cyl_h.y = 1.0;
-	rtv->shape[10].cyl_h.z = 0.0;
-	rtv->shape[10].color = 0xaf00ff00;
-
-	rtv->shape_count = 11;
-
-
-	rtv->light.pos.x = 100.0;
-	rtv->light.pos.y = 0.0;
-	rtv->light.pos.z = 1000.0;
-
-	
 	return (1);
 }
 
-int		main(void)
+void	print_usage(void)
 {
+	char *line;
+	int	fd;
+	int	ret;
+
+	ret = 1;
+	fd = open("usage.txt", O_RDONLY);
 	
+	while (ret == 1 && fd > -1)
+	{
+		ret = get_next_line(fd, &line);
+		if (ret == 1)
+		{
+			ft_putendl(line);
+			ft_strdel(&line);
+		}
+	}
+	if (fd > -1)
+		close(fd);
+}
+
+int		main(int argc,char **argv)
+{
 	t_rtv	rtv;
 
+	if (argc != 2 && argv != NULL)
+	{
+		print_usage();
+		return (1);
+	}
 	if(SDL_Init( SDL_INIT_VIDEO ) < 0)
 		return (1);
+		
 	if (create_rtv_struct(&rtv) == 0)
 		return (1);
-	
+	read_imput(argv, &rtv);
 	render_image(&rtv);
 	draw_to_window(&rtv);
 	rtv_loop_and_exit(&rtv);

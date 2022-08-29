@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 13:29:24 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/07/26 15:47:02 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/08/29 21:07:38 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ double	cone_intersection(t_ray *ray, t_rtv *rtv , int count)
 	abc.x = calculate_a(ray, m, h);
 	abc.y = calculate_b(ray, m, w, h);
 	abc.z = calculate_c(m, w, h);
-	if ((abc.y * abc.y) - (4 * abc.x * abc.z) > 0)
+	if ((abc.y * abc.y) - (4 * abc.x * abc.z) >= 0)
 	{
 		t[0] = (-abc.y + sqrt((abc.y * abc.y) - (4 * abc.x * abc.z))) / (2 * abc.x);
 		t[1] = (-abc.y - sqrt((abc.y * abc.y) - (4 * abc.x * abc.z))) / (2 * abc.x);

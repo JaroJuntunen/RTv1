@@ -1,0 +1,34 @@
+	How to use.
+
+	./RTv1 {file_name}
+
+	file should have for example
+		-shapes and theyr properties and position
+		-camera position
+		-light and its properties and position
+
+	Example for everything you can put to the file.
+
+	As meny as you want in any combination.
+	{
+		sphere 0.0.1000 2   0xffffff00
+		       pos.     r.  color
+
+		plane 10.0.1000 1.0.0  0xffffff00
+		      pos       dir     color
+
+		cylinder 0.0.1000 10.0.1000 2  0xffffff00
+		         srt.pos  heding.pos   r. color
+
+		cone 0.0.1000 0.10.1000 2 0xffffff00
+		      srt.pos top.pos   r. color
+	}
+
+	Onely one per file.
+	{
+		light 0.-10.0 15
+		      pos     intensity.
+
+		camera 0.0.0
+		       pos.
+	}

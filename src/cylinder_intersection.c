@@ -6,20 +6,11 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 18:45:46 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/07/26 15:48:48 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/08/29 21:07:40 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RTv1.h"
-
-
-//	C = Point at the center of the base of the cylinder
-//	H = Point at the center of the top of the cylinder
-//	r = Cylinder radius
-//	P = Point on the cylinder surface
-//	
-//	L0 = Point on the line
-//	h = cylinder sentral acses;
 
 double	cylinder_intersection(t_ray *ray, t_rtv *rtv , int count)
 {
