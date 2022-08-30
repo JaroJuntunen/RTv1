@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 14:59:58 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/08/11 15:52:20 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/08/30 18:08:25 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,24 @@ int	check_color(char *arg)
 	if (count == 1)
 		return (1);
 	return (0);
+}
+
+int		check_camera(char **line_arg)
+{
+	int	i;
+
+	i = 0;
+	while (line_arg[i] != NULL)
+		i++;
+	if (i != 4)
+		return (-1);
+	if (strcmp(line_arg[0], "camera") != 0)
+		return (-1);
+	if (check_coordinates_and_directions(line_arg[1]) == 0)
+		return (-1);
+	if (check_coordinates_and_directions(line_arg[2]) == 0)
+		return (-1);
+	if (check_coordinates_and_directions(line_arg[3]) == 0)
+		return (-1);
+	return (1);
 }

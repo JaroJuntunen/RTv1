@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:23:19 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/08/23 20:05:05 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/08/30 20:20:35 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,23 @@ static int	is_line_valid(char *line)
 	return (ret);
 }
 
-static int	read_and_store(char **argv,t_rtv *rtv)
+static int	read_and_store(char **argv, t_rtv *rtv, int i, int ret)
 {
-	int		ret;
 	int		fd;
 	char	*line;
-	int		i;
 
 	fd = open(argv[1], O_RDONLY);
-	if(fd < 0)
+	if (fd < 0)
 		parser_error_handler(0);
-	ret = 1;
-	i = 0;
 	while (ret == 1)
 	{
 		ret = get_next_line(fd, &line);
-		if (ret == 1 && (is_line_valid(line) == 1 || strncmp(line, "light", ft_strlen("light")) == 0))
+		if (ret == 1 && (is_line_valid(line) == 1
+				|| (strncmp(line, "light", ft_strlen("light")) == 0)
+				|| (strncmp(line, "camera", ft_strlen("camera")) == 0)))
 		{
-			fill_shape(rtv, line, i);
+			fill_shape(rtv, line, i++);
 			ft_strdel(&line);
-			i++;
 		}
 		else if (ret == 1)
 			ft_strdel(&line);
@@ -86,13 +83,12 @@ static int	shape_counter(char **argv, t_rtv *rtv)
 	char	*line;
 
 	fd = open(argv[1], O_RDONLY);
-	if(fd < 0)
+	if (fd < 0)
 		parser_error_handler(0);
 	rtv->shape_count = 0;
 	ret = 1;
 	while (ret == 1)
 	{
-		
 		ret = get_next_line(fd, &line);
 		if (ret == 1 && is_line_valid(line) == 1)
 		{
@@ -108,13 +104,18 @@ static int	shape_counter(char **argv, t_rtv *rtv)
 	return (1);
 }
 
-int		read_imput(char **argv, t_rtv *rtv)
+int	read_imput(char **argv, t_rtv *rtv)
 {
+	int		i;
+	int		ret;
+
+	ret = 1;
+	i = 0;
 	if (shape_counter(argv, rtv) == -1)
 		parser_error_handler(1);
 	rtv->shape = (t_shape *)malloc(sizeof(t_shape) * rtv->shape_count);
 	if (rtv->shape == NULL)
 		parser_error_handler(1);
-	read_and_store(argv, rtv);
+	read_and_store(argv, rtv, i, ret);
 	return (1);
 }

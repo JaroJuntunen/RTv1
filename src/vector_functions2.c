@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 17:56:22 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/08/29 19:00:47 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/08/30 19:58:51 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_vector	divide_vect_float(t_vector a, double b)
 t_vector	cross_product(t_vector a, t_vector b)
 {
 	t_vector	new;
-	
+
 	new.x = ((a.y * b.z) - (a.z * b.y));
 	new.y = ((a.z * b.x) - (a.x * b.z));
 	new.z = ((a.x * b.y) - (a.y * b.x));

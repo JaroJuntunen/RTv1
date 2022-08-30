@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 13:32:25 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/07/04 17:26:50 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/08/30 19:59:15 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ double	m_a_vector(t_vector a, t_vector b)
 	new.y = a.y * b.y;
 	new.z = a.z * b.z;
 	ret = (new.x + new.y + new.z);
-	
 	return (ret);
 }
 

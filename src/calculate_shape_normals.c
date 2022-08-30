@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 19:37:40 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/08/29 20:56:48 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/08/30 17:40:31 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ t_vector	find_cone_normals(t_rtv *rtv, t_ray *ray)
 	normal.x = ((normal.x /temp_len));
 	normal.y = ((normal.y /temp_len));
 	normal.z = ((normal.z /temp_len));
-	//printf("%f %f %f\n", normal.x, normal.y, normal.z);
 	return (normal);
 }
 

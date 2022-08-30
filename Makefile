@@ -6,7 +6,7 @@
 #    By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/07 18:36:31 by jjuntune          #+#    #+#              #
-#    Updated: 2022/08/29 18:11:56 by jjuntune         ###   ########.fr        #
+#    Updated: 2022/08/30 21:08:46 by jjuntune         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ src_files = $(addprefix $(src_dir), main.c \
 					sphere_intersection.c \
 					cylinder_intersection.c\
 					cone_intersection.c\
-					Image_render.c \
+					image_render.c \
 					check_shadow.c \
 					plane_intersection.c\
 					read_map.c\

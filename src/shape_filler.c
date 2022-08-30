@@ -6,13 +6,13 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:40:57 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/08/16 20:01:30 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/08/30 20:11:24 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RTv1.h"
 
-void	fill_shape(t_rtv *rtv,char *line, int i)
+void	fill_shape(t_rtv *rtv, char *line, int i)
 {
 	char	**line_arg;
 
@@ -28,16 +28,24 @@ void	fill_shape(t_rtv *rtv,char *line, int i)
 	else if (strcmp(line_arg[0], "cone") == 0)
 		fill_cone(rtv, line_arg, i);
 	else if (strcmp(line_arg[0], "light") == 0)
-		if (check_coordinates_and_directions(line_arg[1]) == 1)
+		if (is_it_light(line_arg) == 1)
 			rtv->light.pos = get_pos(line_arg[1]);
+	if (strcmp(line_arg[0], "camera") == 0)
+	{
+		if (check_coordinates_and_directions(line_arg[1]) == 1)
+		{
+			printf("hello\n");
+			fill_camera_arguments(rtv, line_arg);
+		}
+	}
 	ft_arrdel(line_arg);
 }
 
-int get_desimal_div(int count)
+double	get_desimal_div(int count)
 {
-	int ret;
+	double	ret;
 
-	ret = 1;
+	ret = 1.0;
 	while (count != 0)
 	{
 		ret *= 10;
@@ -48,9 +56,9 @@ int get_desimal_div(int count)
 
 double	get_shape_desimals(char *line_arg_r)
 {
-	int i;
-	int count;
-	double r;
+	int		i;
+	int		count;
+	double	r;
 	double	negative;
 
 	negative = 1.0f;
@@ -65,16 +73,12 @@ double	get_shape_desimals(char *line_arg_r)
 	while (line_arg_r[i] >= '0' && line_arg_r[i] <= '9')
 	{
 		r += ((double)line_arg_r[i] - '0');
-		if ((double)line_arg_r[i + 1] >= '0' && (double)line_arg_r[i + 1] <= '9')
+		if ((double)line_arg_r[++i] >= '0' && (double)line_arg_r[i] <= '9')
 			r *= 10.0;
-		i++;
 	}
-	if (line_arg_r[i] == ',')
-	{
-		i++;
+	if (line_arg_r[i++] == ',')
 		while (line_arg_r[i] >= '0' && line_arg_r[i] <= '9')
-			r += ((double)line_arg_r[i++] - '0') / (double)get_desimal_div(count++);
-	}
+			r += ((double)line_arg_r[i++] - '0') / get_desimal_div(count++);
 	return (r * (double)negative);
 }
 

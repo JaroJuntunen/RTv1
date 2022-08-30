@@ -5,65 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/16 12:52:35 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/08/29 21:08:28 by jjuntune         ###   ########.fr       */
+/*   Created: 2022/08/30 21:13:13 by jjuntune          #+#    #+#             */
+/*   Updated: 2022/08/30 21:19:59 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RTv1.h"
 
-float	lerp1d(float a, float b, float t)
-{
-	return ((1 - t) * a + t * b);
-}
-
-//void	creat_primary_ray(t_ray *ray, int x, int y, t_rtv *rtv)
-//{
-//	ray->dir.x = lerp1d(-1.0, 1.0, (1.0f / WIN_W) * x);
-//	ray->dir.y = lerp1d(-0.75, 0.75, (1.0f / WIN_H) * y);
-//	ray->dir.z = 2;
-//	rtv->len = sqrt((m_a_vector(ray->dir, ray->dir)));
-//	ray->dir.x /= rtv->len;
-//	ray->dir.y /= rtv->len;
-//	ray->dir.z /= rtv->len;
-//}
-
 void	creat_primary_ray(t_ray *ray, int x, int y, t_rtv *rtv)
 {
-	t_vector	v_up;
-	t_vector	v;
-	t_vector	u;
-	t_vector	n;
-	t_vector	c;
-	t_vector	l;
-	double plane_h;
-	double plane_w;
-	
-	v_up.x = 0.0;
-	v_up.y = 1.0;
-	v_up.z = 0.0;
-	v_up = divide_vect_float(v_up, sqrt(m_a_vector(v_up, v_up)));
-	ray->coi.x = 0.0;
-	ray->coi.y = 0.0;
-	ray->coi.z = 1.0;
-	n = minus_vectors(rtv->camera,ray->coi);
-	n = divide_vect_float(n, sqrt(m_a_vector(n, n)));
-	n.z *= -1.0;
-	u = cross_product(n, v_up);
-	u = divide_vect_float(u, sqrt(m_a_vector(u, u)));
-	v = cross_product(u, n);
-	c = minus_vectors(rtv->camera, multiply_vect_float(n, 0.1));
-	plane_h = tan(1.04719 / 2) * 2 * 0.1;
-	plane_w = plane_h * ((float)WIN_W / WIN_H);
-	l = minus_vectors(c, multiply_vect_float(u, (plane_w / 2.0)));
-	l = minus_vectors(l, multiply_vect_float(v, plane_h / 2.0));
-	ray->dir = add_vectors(l, multiply_vect_float(u, ((float)x * (plane_w / WIN_W))));
-	ray->dir = add_vectors(ray->dir, multiply_vect_float(v, ((float)y * (plane_h / WIN_H))));
-	ray->dir = minus_vectors(rtv->camera, ray->dir);
-	ray->dir = divide_vect_float(ray->dir, sqrt((m_a_vector(ray->dir, ray->dir))));
-	//printf("%f %f %f\n", ray->dir.x, ray->dir.y, ray->dir.z);
-}
 
+	ray->dir = add_vectors(rtv->camera.l, multiply_vect_float(rtv->camera.u, ((float)x * (rtv->camera.plane_w / WIN_W))));
+	ray->dir = add_vectors(ray->dir, multiply_vect_float(rtv->camera.v, ((float)y * (rtv->camera.plane_h / WIN_H))));
+	ray->dir = minus_vectors(rtv->camera.pos, ray->dir);
+	ray->dir = divide_vect_float(ray->dir, sqrt((m_a_vector(ray->dir, ray->dir))));
+}
 
 int	ray_shooter(t_ray *ray,t_rtv *rtv)
 {
@@ -95,8 +51,23 @@ int	ray_shooter(t_ray *ray,t_rtv *rtv)
 	}
 	if (rtv->clo_ret == -1 || ((rtv->clo_ret > 0.0) && (check_shadow(ray,rtv) == 1)))
 		return (0x00000000);
-	//return(rtv->shape[rtv->clo_shape].color.value);
 	return (get_color(rtv, ray));
+}
+
+static void	creat_camera(t_rtv *rtv)
+{
+	rtv->camera.v_up = divide_vect_float(rtv->camera.v_up, sqrt(m_a_vector(rtv->camera.v_up, rtv->camera.v_up)));
+	rtv->camera.n = minus_vectors(rtv->camera.pos,rtv->camera.coi);
+	rtv->camera.n = divide_vect_float(rtv->camera.n, sqrt(m_a_vector(rtv->camera.n, rtv->camera.n)));
+	rtv->camera.n.z *= -1.0;
+	rtv->camera.u = cross_product(rtv->camera.n, rtv->camera.v_up);
+	rtv->camera.u = divide_vect_float(rtv->camera.u, sqrt(m_a_vector(rtv->camera.u, rtv->camera.u)));
+	rtv->camera.v = cross_product(rtv->camera.u, rtv->camera.n);
+	rtv->camera.c = minus_vectors(rtv->camera.pos, multiply_vect_float(rtv->camera.n, 0.1));
+	rtv->camera.plane_h = tan(1.04719 / 2) * 2 * 0.1;
+	rtv->camera.plane_w = rtv->camera.plane_h * ((float)WIN_W / WIN_H);
+	rtv->camera.l = minus_vectors(rtv->camera.c, multiply_vect_float(rtv->camera.u, (rtv->camera.plane_w / 2.0)));
+	rtv->camera.l = minus_vectors(rtv->camera.l, multiply_vect_float(rtv->camera.v, rtv->camera.plane_h / 2.0));
 }
 
 void	render_image(t_rtv	*rtv)
@@ -107,14 +78,13 @@ void	render_image(t_rtv	*rtv)
 	t_ray ray;
 	
 	y = 0;
+	creat_camera(rtv);
 	while (y < WIN_H)
 	{
 		x = 0;
 		while (x < WIN_W)
 		{
-			
-			ray.start = rtv->camera;
-			
+			ray.start = rtv->camera.pos;
 			creat_primary_ray(&ray, x, y, rtv);
 			color = ray_shooter(&ray, rtv);
 			

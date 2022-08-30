@@ -6,36 +6,43 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 18:45:46 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/08/29 21:07:40 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/08/30 21:02:29 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RTv1.h"
 
-double	cylinder_intersection(t_ray *ray, t_rtv *rtv , int count)
+static void	get_abc(t_ray *ray, t_rtv *rtv, t_shape_calc	*cylinder, int i)
 {
-	t_vector	h;
-	t_vector	w;
-	t_vector	abc;
-	double		discr;
-	double		t[2];
-	double		temp;
+	cylinder->abc.x = (m_a_vector(ray->dir, ray->dir)
+			- (m_a_vector(ray->dir, cylinder->h)
+				* m_a_vector(ray->dir, cylinder->h)));
+	cylinder->abc.y = (2 * (m_a_vector(ray->dir, cylinder->w)
+				- (m_a_vector(ray->dir, cylinder->h)
+					* m_a_vector(cylinder->w, cylinder->h))));
+	cylinder->abc.z = (m_a_vector(cylinder->w, cylinder->w)
+			- (m_a_vector(cylinder->w, cylinder->h)
+				* m_a_vector(cylinder->w, cylinder->h))
+			- (rtv->shape[i].r * rtv->shape[i].r));
+}
 
-	w = minus_vectors(ray->start , rtv->shape[count].pos);
-	h = minus_vectors(rtv->shape[count].cyl_h, rtv->shape[count].pos); 
-	temp = sqrt((m_a_vector(h,h)));
-	h.x /= temp;
-	h.y /= temp;
-	h.z /= temp;
-	abc.x = (m_a_vector(ray->dir, ray->dir) - (m_a_vector(ray->dir, h) * m_a_vector(ray->dir, h)));
-	abc.y = (2 * (m_a_vector(ray->dir, w) - (m_a_vector(ray->dir, h) * m_a_vector(w, h))));
-	abc.z = (m_a_vector(w, w) - (m_a_vector(w, h) * m_a_vector(w, h)) - (rtv->shape[count].r * rtv->shape[count].r));
-	discr = ((abc.y * abc.y) - (4 * abc.x * abc.z));
-	if (discr >= 0)
+double	cylinder_intersection(t_ray *ray, t_rtv *rtv, int i)
+{
+	t_shape_calc	cylinder;
+	double			t[2];
+
+	cylinder.w = minus_vectors(ray->start, rtv->shape[i].pos);
+	cylinder.h = minus_vectors(rtv->shape[i].cyl_h, rtv->shape[i].pos);
+	cylinder.h = divide_vect_float(cylinder.h,
+			sqrt((m_a_vector(cylinder.h, cylinder.h))));
+	get_abc(ray, rtv, &cylinder, i);
+	cylinder.discr = ((cylinder.abc.y * cylinder.abc.y)
+			- (4 * cylinder.abc.x * cylinder.abc.z));
+	if (cylinder.discr >= 0)
 	{
-		discr = sqrt(discr);
-		t[0] = (-abc.y + discr) / (2 * abc.x);
-		t[1] = (-abc.y - discr) / (2 * abc.x);
+		cylinder.discr = sqrt(cylinder.discr);
+		t[0] = (-cylinder.abc.y + cylinder.discr) / (2 * cylinder.abc.x);
+		t[1] = (-cylinder.abc.y - cylinder.discr) / (2 * cylinder.abc.x);
 		if (t[0] < t[1] && t[0] > (double)0)
 			return (t[0]);
 		else

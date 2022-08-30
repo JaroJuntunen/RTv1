@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 14:32:10 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/08/23 20:04:29 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/08/30 20:03:02 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,11 @@ void	fill_cylinder(t_rtv *rtv, char **line_arg, int i)
 	rtv->shape[i].cyl_h = get_pos(line_arg[2]);
 	rtv->shape[i].r = get_shape_desimals(line_arg[3]);
 	rtv->shape[i].color.value = ft_atoi_base(line_arg[4], 16);
+}
+
+void	fill_camera_arguments(t_rtv *rtv, char **line_arg)
+{
+	rtv->camera.pos = get_pos(line_arg[1]);
+	rtv->camera.coi = get_pos(line_arg[2]);
+	rtv->camera.v_up = get_pos(line_arg[3]);
 }

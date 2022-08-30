@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 19:19:11 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/08/23 19:56:54 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/08/30 19:51:06 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,38 +44,34 @@ void	ofset_plane_dir(t_ray *ray, t_rtv *rtv)
 		ray->start.z += 0.0001;
 }
 
-int		check_shadow(t_ray *ray, t_rtv *rtv)
+void	offset_and_declare_shadow_ray(t_rtv *rtv, t_ray *ray)
+{
+	ray->start = add_vectors(ray->start,
+			multiply_vect_float(ray->dir, rtv->clo_ret));
+	ray->dir = minus_vectors(rtv->light.pos, ray->start);
+	ray->dir = divide_vect_float(ray->dir,
+			sqrt((m_a_vector(ray->dir, ray->dir))));
+	ofset_dir(ray);
+}
+
+int	check_shadow(t_ray *ray, t_rtv *rtv)
 {
 	double	ret;
 	int		count;
-	t_ray	ofset_ray;
 
 	count = 0;
 	ret = -1;
-	ray->start.x = (ray->dir.x * rtv->clo_ret);
-	ray->start.y = (ray->dir.y * rtv->clo_ret);
-	ray->start.z = (ray->dir.z * rtv->clo_ret);
-	ray->dir = minus_vectors(rtv->light.pos, ray->start);
-	rtv->light.dist = sqrt((m_a_vector(ray->dir, ray->dir)));
-	ray->dir.x /= rtv->light.dist;
-	ray->dir.y /= rtv->light.dist;
-	ray->dir.z /= rtv->light.dist;
-	ofset_ray.dir = ray->dir;
-	ofset_ray.start = ray->start;
-	if (ft_strcmp(rtv->shape[rtv->clo_shape].type, "plane") == 0)
-		ofset_plane_dir(&ofset_ray, rtv);
-	else
-		ofset_dir(&ofset_ray);
+	offset_and_declare_shadow_ray(rtv, ray);
 	while (ret < 0.000000 && count < rtv->shape_count)
 	{
 		if (ft_strcmp(rtv->shape[count].type, "sphere") == 0)
-			ret = sphere_intersection(&ofset_ray, rtv, count);
+			ret = sphere_intersection(ray, rtv, count);
 		else if (ft_strcmp(rtv->shape[count].type, "cylinder") == 0)
-			ret = cylinder_intersection(&ofset_ray, rtv, count);
+			ret = cylinder_intersection(ray, rtv, count);
 		else if (ft_strcmp(rtv->shape[count].type, "plane") == 0)
-			ret = plane_intersection(&ofset_ray, rtv, count);
+			ret = plane_intersection(ray, rtv, count);
 		else if (ft_strcmp(rtv->shape[count].type, "cone") == 0)
-			ret = cone_intersection(&ofset_ray, rtv, count);
+			ret = cone_intersection(ray, rtv, count);
 		count++;
 		if (ret > rtv->light.dist)
 			ret = -1;
