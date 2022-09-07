@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:36:07 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/08/30 20:55:01 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/07 16:37:11 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,11 @@ typedef struct s_rtv
 	t_shape			*shape;
 	int				clo_shape;
 	double			clo_ret;
+	double			t[2];
+	double			clo_t[2];
 	int				shape_count;
 	double			len;
+	t_ray			*orig_ray;
 }					t_rtv;
 
 double		m_a_vector(t_vector a, t_vector b);

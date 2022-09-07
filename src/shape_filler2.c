@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 14:32:10 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/08/30 20:03:02 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/07 17:14:57 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ void	fill_cylinder(t_rtv *rtv, char **line_arg, int i)
 
 void	fill_camera_arguments(t_rtv *rtv, char **line_arg)
 {
-	rtv->camera.pos = get_pos(line_arg[1]);
-	rtv->camera.coi = get_pos(line_arg[2]);
-	rtv->camera.v_up = get_pos(line_arg[3]);
+	if (check_coordinates_and_directions(line_arg[1]) == 1)
+		rtv->camera.pos = get_pos(line_arg[1]);
+	if (check_coordinates_and_directions(line_arg[2]) == 1)
+		rtv->camera.coi = get_pos(line_arg[2]);
+	if (check_coordinates_and_directions(line_arg[3]) == 1)
+		rtv->camera.v_up = get_pos(line_arg[3]);
 }

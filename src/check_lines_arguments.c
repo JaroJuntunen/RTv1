@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 14:59:58 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/08/30 18:08:25 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/07 17:16:38 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@ int	check_coordinates_and_directions(char *arg)
 	{
 		if ((arg[i] >= '0' && arg[i] <= '9' ) || arg[i] == ',' || arg[i] == '-')
 			i++;
-		else if (arg[i] == '.')
+		else if (arg[i] == '.' && ((arg[i + 1] >= '0' && arg[i + 1] <= '9')
+				|| arg[i + 1] == '-'))
 		{
 			count++;
 			i++;
 		}
 		else
-			return (-1);
+			return (0);
 	}
 	if (count == 2)
 		return (1);
@@ -53,7 +54,7 @@ int	check_r(char *arg)
 			i++;
 		}
 		else
-			return (-1);
+			return (0);
 	}
 	if (count < 2)
 		return (1);
@@ -69,7 +70,8 @@ int	check_color(char *arg)
 	count = 0;
 	while (arg[i] != '\0')
 	{
-		if ((arg[i] >= '0' && arg[i] <= '9') || (arg[i] >= 'a' && arg[i] <= 'f') || arg[i] == '-')
+		if ((arg[i] >= '0' && arg[i] <= '9')
+			|| (arg[i] >= 'a' && arg[i] <= 'f') || arg[i] == '-')
 			i++;
 		else if (arg[i] == 'x')
 		{
@@ -77,14 +79,14 @@ int	check_color(char *arg)
 			count++;
 		}
 		else
-			return (-1);
+			return (0);
 	}
 	if (count == 1)
 		return (1);
 	return (0);
 }
 
-int		check_camera(char **line_arg)
+int	check_camera(char **line_arg)
 {
 	int	i;
 

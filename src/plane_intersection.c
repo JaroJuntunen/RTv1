@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 20:22:17 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/08/30 20:22:33 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/07 16:43:04 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ double	plane_intersection(t_ray *ray, t_rtv *rtv, int count)
 	temp.y *= -1.0;
 	temp.z *= -1.0;
 	t = (m_a_vector(temp, n) / intersection);
+	rtv->t[0] = t;
+	rtv->t[1] = t;
 	if (intersection != 0 && t > 0)
 		return (t);
 	return (-1);

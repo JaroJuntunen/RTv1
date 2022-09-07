@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:28:21 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/08/30 20:02:45 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/07 16:40:47 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 double	sphere_intersection(t_ray *ray, t_rtv *rtv, int count)
 {
-	double		t[2];
 	t_vector	w;
 	double		discr;
 	double		b;
@@ -28,12 +27,12 @@ double	sphere_intersection(t_ray *ray, t_rtv *rtv, int count)
 	if (discr >= 0)
 	{
 		discr = sqrt(discr);
-		t[0] = (-b + discr) / (2 * m_a_vector(ray->dir, ray->dir));
-		t[1] = (-b - discr) / (2 * m_a_vector(ray->dir, ray->dir));
-		if (t[0] < t[1] && t[0] > (double)0)
-			ret = t[0];
+		rtv->t[0] = (-b + discr) / (2 * m_a_vector(ray->dir, ray->dir));
+		rtv->t[1] = (-b - discr) / (2 * m_a_vector(ray->dir, ray->dir));
+		if (rtv->t[0] < rtv->t[1] && rtv->t[0] > (double)0)
+			ret = rtv->t[0];
 		else
-			ret = t[1];
+			ret = rtv->t[1];
 	}
 	else
 		ret = -1.0f;

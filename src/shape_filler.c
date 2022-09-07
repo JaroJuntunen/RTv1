@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:40:57 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/08/30 20:11:24 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/07 17:14:32 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,7 @@ void	fill_shape(t_rtv *rtv, char *line, int i)
 			rtv->light.pos = get_pos(line_arg[1]);
 	if (strcmp(line_arg[0], "camera") == 0)
 	{
-		if (check_coordinates_and_directions(line_arg[1]) == 1)
-		{
-			printf("hello\n");
-			fill_camera_arguments(rtv, line_arg);
-		}
+		fill_camera_arguments(rtv, line_arg);
 	}
 	ft_arrdel(line_arg);
 }
