@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:40:57 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/07 17:14:32 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/07 19:04:13 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,47 +35,6 @@ void	fill_shape(t_rtv *rtv, char *line, int i)
 		fill_camera_arguments(rtv, line_arg);
 	}
 	ft_arrdel(line_arg);
-}
-
-double	get_desimal_div(int count)
-{
-	double	ret;
-
-	ret = 1.0;
-	while (count != 0)
-	{
-		ret *= 10;
-		count--;
-	}
-	return (ret);
-}
-
-double	get_shape_desimals(char *line_arg_r)
-{
-	int		i;
-	int		count;
-	double	r;
-	double	negative;
-
-	negative = 1.0f;
-	r = 0.0;
-	i = 0;
-	count = 1;
-	if (line_arg_r[i] == '-')
-	{
-		negative = -1.0f;
-		i++;
-	}
-	while (line_arg_r[i] >= '0' && line_arg_r[i] <= '9')
-	{
-		r += ((double)line_arg_r[i] - '0');
-		if ((double)line_arg_r[++i] >= '0' && (double)line_arg_r[i] <= '9')
-			r *= 10.0;
-	}
-	if (line_arg_r[i++] == ',')
-		while (line_arg_r[i] >= '0' && line_arg_r[i] <= '9')
-			r += ((double)line_arg_r[i++] - '0') / get_desimal_div(count++);
-	return (r * (double)negative);
 }
 
 t_vector	get_pos(char *line_arg_pos)

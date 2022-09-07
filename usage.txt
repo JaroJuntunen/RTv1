@@ -11,24 +11,24 @@
 
 	As meny as you want in any combination.
 	{
-		sphere 0.0.1000 2   0xffffff00
+		sphere 0.0.10 2   0xffffff00
 		       pos.     r.  color
 
-		plane 10.0.1000 1.0.0  0xffffff00
+		plane 10.0.10 1.0.0  0xffffff00
 		      pos       dir     color
 
-		cylinder 0.0.1000 10.0.1000 2  0xffffff00
+		cylinder 0.0.10 10.0.1000 2  0xffffff00
 		         srt.pos  heding.pos   r. color
 
-		cone 0.0.1000 0.10.1000 2 0xffffff00
+		cone 0.0.10 0.10.10 2 0xffffff00
 		      srt.pos top.pos   r. color
 	}
 
 	Onely one per file.
 	{
-		light 0.-10.0 15
-		      pos     intensity.
+		light 0.0.0
+		      pos
 
-		camera 0.0.0
-		       pos.
+		camera 0.0.0 0.0.10             0.10.0
+		       pos.  point of intres.    world up.
 	}
