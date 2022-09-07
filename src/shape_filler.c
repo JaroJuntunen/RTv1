@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:40:57 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/07 19:04:13 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/07 19:22:59 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ t_vector	get_pos(char *line_arg_pos)
 	char		**positions;
 
 	positions = ft_strsplit(line_arg_pos, '.');
-	pos.x = get_shape_desimals(positions[0]);
-	pos.y = get_shape_desimals(positions[1]);
-	pos.z = get_shape_desimals(positions[2]);
+	pos.x = ft_atof(positions[0]);
+	pos.y = ft_atof(positions[1]);
+	pos.z = ft_atof(positions[2]);
 	ft_arrdel(positions);
 	return (pos);
 }

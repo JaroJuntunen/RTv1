@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 19:03:32 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/07 19:06:35 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/07 19:22:16 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static double	get_desimal_div(int count)
 	return (ret);
 }
 
-double	get_shape_desimals(char *line_arg_r)
+double	ft_atof(char *line_arg_r)
 {
 	int		i;
 	int		count;

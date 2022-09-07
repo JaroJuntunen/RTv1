@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 14:32:10 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/07 17:14:57 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/07 19:22:34 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	fill_sphere(t_rtv *rtv, char **line_arg, int i)
 {
 	rtv->shape[i].type = "sphere";
 	rtv->shape[i].pos = get_pos(line_arg[1]);
-	rtv->shape[i].r = get_shape_desimals(line_arg[2]);
+	rtv->shape[i].r = ft_atof(line_arg[2]);
 	rtv->shape[i].color.value = ft_atoi_base(line_arg[3], 16);
 }
 
@@ -33,7 +33,7 @@ void	fill_cone(t_rtv *rtv, char **line_arg, int i)
 	rtv->shape[i].type = "cone";
 	rtv->shape[i].pos = get_pos(line_arg[1]);
 	rtv->shape[i].cyl_h = get_pos(line_arg[2]);
-	rtv->shape[i].r = get_shape_desimals(line_arg[3]);
+	rtv->shape[i].r = ft_atof(line_arg[3]);
 	rtv->shape[i].color.value = ft_atoi_base(line_arg[4], 16);
 }
 
@@ -42,7 +42,7 @@ void	fill_cylinder(t_rtv *rtv, char **line_arg, int i)
 	rtv->shape[i].type = "cylinder";
 	rtv->shape[i].pos = get_pos(line_arg[1]);
 	rtv->shape[i].cyl_h = get_pos(line_arg[2]);
-	rtv->shape[i].r = get_shape_desimals(line_arg[3]);
+	rtv->shape[i].r = ft_atof(line_arg[3]);
 	rtv->shape[i].color.value = ft_atoi_base(line_arg[4], 16);
 }
 

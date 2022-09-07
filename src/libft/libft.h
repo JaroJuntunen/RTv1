@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:22:17 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/07/28 15:45:57 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/07 19:21:48 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,5 @@ int		ft_isthere(char *str, char c);
 int		ft_strmove(char **dst, char **src);
 double	values_abs(double i);
 int		ft_atoi_base(const char *str, int base);
-
+double	ft_atof(char *line_arg_r);
 #endif
