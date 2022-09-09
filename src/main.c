@@ -6,11 +6,31 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:36:09 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/08/30 20:27:47 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/09 18:26:32 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RTv1.h"
+
+void	draw_to_window(t_rtv *rtv)
+{
+	int		*texture_data;
+	int		texture_pitch;
+
+	if (SDL_LockTexture(rtv->texture, NULL, (void **)&texture_data,
+			&texture_pitch) < 0)
+	{
+		exit(1);
+	}
+	ft_memcpy(texture_data, rtv->frame_buffer.data,
+		(rtv->frame_buffer.data_len * sizeof(int)));
+	SDL_UnlockTexture(rtv->texture);
+	if (SDL_RenderCopy(rtv->ren, rtv->texture, NULL, NULL) < 0)
+	{
+		exit(1);
+	}
+	SDL_RenderPresent(rtv->ren);
+}
 
 void	rtv_loop_and_exit(t_rtv	*rtv)
 {
@@ -26,32 +46,16 @@ void	rtv_loop_and_exit(t_rtv	*rtv)
 			if (rtv->event.type == SDL_KEYDOWN)
 				if (rtv->event.key.keysym.sym == SDLK_ESCAPE)
 					quit = 1;
+			if (rtv->event.type == SDL_KEYDOWN)
+				if (rtv->event.key.keysym.sym == SDLK_r)
+					draw_to_window(rtv);
 		}
-		SDL_DestroyTexture(rtv->texture);
+		
 	}
+	SDL_DestroyTexture(rtv->texture);
 	SDL_DestroyWindow(rtv->win);
 	free(rtv->frame_buffer.data);
 	free(rtv->shape);
-}
-
-void	draw_to_window(t_rtv *rtv)
-{
-	int		*texture_data;
-	int		texture_pitch;
-
-	if (SDL_LockTexture(rtv->texture, NULL, (void **)&texture_data,
-			&texture_pitch) < 0)
-	{
-		ft_putstr("hello1\n");
-	}
-	ft_memcpy(texture_data, rtv->frame_buffer.data,
-		(rtv->frame_buffer.data_len * sizeof(int)));
-	SDL_UnlockTexture(rtv->texture);
-	if (SDL_RenderCopy(rtv->ren, rtv->texture, NULL, NULL) < 0)
-	{
-		ft_putstr("hello\n");
-	}
-	SDL_RenderPresent(rtv->ren);
 }
 
 int	create_rtv_struct(t_rtv	*rtv)

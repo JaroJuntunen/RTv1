@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 20:22:17 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/07 16:43:04 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/09 17:56:13 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	fix_normal(t_ray *ray, t_rtv *rtv, int count)
 {
 	double	temp;
 
-	temp = sqrt((m_a_vector(rtv->shape[count].cyl_h, rtv->shape[count].cyl_h)));
+	temp = sqrt((cros_prdct(rtv->shape[count].cyl_h, rtv->shape[count].cyl_h)));
 	rtv->shape[count].cyl_h.x /= temp;
 	rtv->shape[count].cyl_h.y /= temp;
 	rtv->shape[count].cyl_h.z /= temp;
-	temp = m_a_vector(rtv->shape[count].cyl_h, ray->dir);
+	temp = cros_prdct(rtv->shape[count].cyl_h, ray->dir);
 	if (temp < 0)
 	{
 		rtv->shape[count].cyl_h.x *= -1.0;
@@ -38,12 +38,12 @@ double	plane_intersection(t_ray *ray, t_rtv *rtv, int count)
 
 	fix_normal(ray, rtv, count);
 	n = rtv->shape[count].cyl_h;
-	intersection = m_a_vector(ray->dir, n);
+	intersection = cros_prdct(ray->dir, n);
 	temp = minus_vectors(ray->start, rtv->shape[count].pos);
 	temp.x *= -1.0;
 	temp.y *= -1.0;
 	temp.z *= -1.0;
-	t = (m_a_vector(temp, n) / intersection);
+	t = (cros_prdct(temp, n) / intersection);
 	rtv->t[0] = t;
 	rtv->t[1] = t;
 	if (intersection != 0 && t > 0)

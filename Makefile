@@ -6,7 +6,7 @@
 #    By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/07 18:36:31 by jjuntune          #+#    #+#              #
-#    Updated: 2022/08/30 21:08:46 by jjuntune         ###   ########.fr        #
+#    Updated: 2022/09/09 18:14:38 by jjuntune         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ CPPFLAGS = -D_REENTRANT
 all: $(NAME)
 
 $(NAME): $(FT_LIBRERY) $(obj_files) | $(build_dir) 
-	@ $(LD) $(FT_LIBRERY) $(obj_files) $(LDFLAGS) -o $(NAME) -fsanitize=address
+	@ $(LD) $(FT_LIBRERY) $(obj_files) $(LDFLAGS) -o $(NAME)
 
 $(obj_files): $(libsdl2_lib)
 
@@ -63,7 +63,7 @@ $(build_dir):
 
 $(build_dir)%.o: $(src_dir)%.c
 $(build_dir)%.o: $(src_dir)%.c | $(build_dir)%.dep
-	@ $(CC) $(CFLAGS) $(CPPFLAGS) $(dependency_flags) -o $(@) $(<) -fsanitize=address
+	@ $(CC) $(CFLAGS) $(CPPFLAGS) $(dependency_flags) -o $(@) $(<)
 
 $(dependency_files):
 

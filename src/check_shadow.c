@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 19:19:11 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/06 13:19:32 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/09 17:56:13 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 void	ofset_dir(t_ray *ray)
 {
-	if (ray->dir.x >= 0)
-		ray->start.x -= 0.000001;
+	if (ray->dir.x > 0)
+		ray->start.x += 0.0001;
 	else
-		ray->start.x += 0.000001;
-	if (ray->dir.y >= 0)
-		ray->start.y -= 0.000001;
+		ray->start.x -= 0.0001;
+	if (ray->dir.y > 0)
+		ray->start.y += 0.0001;
 	else
-		ray->start.y += 0.000001;
-	if (ray->dir.z >= 0)
-		ray->start.z -= 0.000001;
+		ray->start.y -= 0.0001;
+	if (ray->dir.z > 0)
+		ray->start.z += 0.0001;
 	else
-		ray->start.z += 0.000001;
+		ray->start.z -= 0.0001;
 }
 
 void	ofset_plane_dir(t_ray *ray, t_rtv *rtv)
@@ -49,9 +49,12 @@ void	offset_and_declare_shadow_ray(t_rtv *rtv, t_ray *ray)
 	ray->start = add_vectors(ray->start,
 			multiply_vect_float(ray->dir, rtv->clo_ret));
 	ray->dir = minus_vectors(rtv->light.pos, ray->start);
-	ray->dir = divide_vect_float(ray->dir,
-			sqrt((m_a_vector(ray->dir, ray->dir))));
-	ofset_dir(ray);
+	rtv->light.dist = sqrt((cros_prdct(ray->dir, ray->dir)));
+	ray->dir = divide_vect_float(ray->dir, rtv->light.dist);
+	if (ft_strcmp(rtv->shape[rtv->clo_shape].type, "plane") == 0)
+		ofset_plane_dir(ray, rtv);
+	else
+		ofset_dir(ray);
 }
 
 int	check_shadow(t_ray *ray, t_rtv *rtv)
@@ -73,7 +76,7 @@ int	check_shadow(t_ray *ray, t_rtv *rtv)
 		else if (ft_strcmp(rtv->shape[count].type, "cone") == 0)
 			ret = cone_intersection(ray, rtv, count);
 		count++;
-		if (ret > rtv->light.dist)
+		if (ret > rtv->light.dist || ret < 0)
 			ret = -1;
 	}
 	if (ret < 0.00000)

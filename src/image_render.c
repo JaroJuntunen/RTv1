@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Image_render.c                                     :+:      :+:    :+:   */
+/*   image_render.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 21:13:13 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/07 16:51:19 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/09 17:56:13 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	creat_primary_ray(t_ray *ray, int x, int y, t_rtv *rtv)
 				((float)y * (rtv->camera.plane_h / WIN_H))));
 	ray->dir = minus_vectors(rtv->camera.pos, ray->dir);
 	ray->dir = divide_vect_float(ray->dir,
-			sqrt((m_a_vector(ray->dir, ray->dir))));
+			sqrt((cros_prdct(ray->dir, ray->dir))));
 	rtv->orig_ray = ray;
 }
 
@@ -72,14 +72,14 @@ int	ray_shooter(t_ray *ray, t_rtv *rtv)
 static void	creat_camera(t_rtv *rtv)
 {
 	rtv->camera.v_up = divide_vect_float(rtv->camera.v_up,
-			sqrt(m_a_vector(rtv->camera.v_up, rtv->camera.v_up)));
+			sqrt(cros_prdct(rtv->camera.v_up, rtv->camera.v_up)));
 	rtv->camera.n = minus_vectors(rtv->camera.pos, rtv->camera.coi);
 	rtv->camera.n = divide_vect_float(rtv->camera.n,
-			sqrt(m_a_vector(rtv->camera.n, rtv->camera.n)));
+			sqrt(cros_prdct(rtv->camera.n, rtv->camera.n)));
 	rtv->camera.n.z *= -1.0;
 	rtv->camera.u = cross_product(rtv->camera.n, rtv->camera.v_up);
 	rtv->camera.u = divide_vect_float(rtv->camera.u,
-			sqrt(m_a_vector(rtv->camera.u, rtv->camera.u)));
+			sqrt(cros_prdct(rtv->camera.u, rtv->camera.u)));
 	rtv->camera.v = cross_product(rtv->camera.u, rtv->camera.n);
 	rtv->camera.c = minus_vectors(rtv->camera.pos,
 			multiply_vect_float(rtv->camera.n, 0.1));

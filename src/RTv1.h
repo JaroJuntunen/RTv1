@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:36:07 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/07 16:37:11 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/09 17:56:13 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ typedef struct s_rtv
 	t_ray			*orig_ray;
 }					t_rtv;
 
-double		m_a_vector(t_vector a, t_vector b);
+double		cros_prdct(t_vector a, t_vector b);
 t_vector	divide_vectors(t_vector a, t_vector b);
 t_vector	multiply_vectors(t_vector a, t_vector b);
 t_vector	minus_vectors(t_vector a, t_vector b);
@@ -118,7 +118,7 @@ int			check_shadow(t_ray *ray, t_rtv *rtv);
 t_vector	multiply_vect_float(t_vector a, double b);
 t_vector	cross_product(t_vector a, t_vector b);
 t_vector	divide_vect_float(t_vector a, double b);
-void		find_normal(t_ray *ray, t_rtv *rtv);
+void		find_normal(t_ray *ray, t_rtv *rtv, int i);
 
 void		render_image(t_rtv	*rtv);
 

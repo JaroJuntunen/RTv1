@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:23:19 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/08/30 20:20:35 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/09 18:26:06 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static int	is_line_valid(char *line)
 				ret = 1;
 		ft_arrdel(line_arg);
 	}
+	else
+		ft_arrdel(line_arg);
 	return (ret);
 }
 
@@ -95,8 +97,7 @@ static int	shape_counter(char **argv, t_rtv *rtv)
 			ft_strdel(&line);
 			rtv->shape_count++;
 		}
-		else if (ret == 1)
-			ft_strdel(&line);
+		ft_strdel(&line);
 	}
 	close(fd);
 	if (ret == -1)
