@@ -2,6 +2,8 @@ plane 10.0.1000 1.0.0  0xff000000
 plane -10.0.1000 -1.0.0  0xff00ff00
 plane 0.10.1000 0.1.0 0xffff0000
 plane 0.-10.1000 0.-1.0  0x00ffff00
-cylinder 10.5.0 0.0.1000 0,1 0xa0ffff00
-cylinder -10.5.0 0.0.1000 0,1 0xfff0f00
-light 1.1.0
+sphere 0.0.100 4 0x00ffff00
+cylinder -10.10.100 10.-10.100 0,5 0xa0ffff00
+cylinder -10.-10.100 10.10.100 0,5 0xfff0f000
+light 0.0.90
+camera 0.0.0 0.0.10 0.10.0

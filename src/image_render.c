@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 21:13:13 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/09 17:56:13 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/11 19:55:47 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ double	get_shape_intersections(t_ray *ray, t_rtv *rtv, int count)
 {
 	double	ret;
 
+	rtv->t[0] = -1.0;
+	rtv->t[1] = -1.0;
 	if (ft_strcmp(rtv->shape[count].type, "sphere") == 0)
 		ret = sphere_intersection(ray, rtv, count);
 	else if (ft_strcmp(rtv->shape[count].type, "cylinder") == 0)
@@ -48,6 +50,8 @@ int	ray_shooter(t_ray *ray, t_rtv *rtv)
 
 	count = 0;
 	rtv->clo_ret = -1.0;
+	rtv->clo_t[0] = -1.0;
+	rtv->clo_t[1] = -1.0;
 	while (count < rtv->shape_count)
 	{
 		ret = get_shape_intersections(ray, rtv, count);

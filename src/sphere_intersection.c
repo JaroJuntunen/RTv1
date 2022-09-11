@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:28:21 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/09 17:56:13 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/11 14:18:47 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ double	sphere_intersection(t_ray *ray, t_rtv *rtv, int count)
 	if (discr >= 0)
 	{
 		discr = sqrt(discr);
-		rtv->t[0] = (-b + discr) / (2 * cros_prdct(ray->dir, ray->dir));
-		rtv->t[1] = (-b - discr) / (2 * cros_prdct(ray->dir, ray->dir));
-		if (rtv->t[0] < rtv->t[1] && rtv->t[0] > (double)0)
+		rtv->t[0] = (-b - discr) / (2 * cros_prdct(ray->dir, ray->dir));
+		rtv->t[1] = (-b + discr) / (2 * cros_prdct(ray->dir, ray->dir));
+		if (rtv->t[0] < rtv->t[1] && rtv->t[0] >= (double)0)
 			ret = rtv->t[0];
 		else
 			ret = rtv->t[1];

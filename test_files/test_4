@@ -2,5 +2,6 @@ cylinder 10.5.0 0.0.1000 0,1 0xff00ff00
 cylinder -10.5.0 0.0.1000 0,1 0xffff0000
 cylinder 9.-5.0 0.0.1000 1 0xab42cd00
 cylinder -7.-5.0 0.0.1000 1 0x94fd2400
-plane 0.0.10000 0.0.1 0xffffff00
+plane 0.0.100 0.0.1 0xffffff00
 light 1.1.0
+camera 0.0.0 0.0.10 0.10

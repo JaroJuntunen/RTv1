@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 19:37:40 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/09 17:56:13 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/11 19:12:19 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,14 @@ t_vector	find_cylinder_normal(t_rtv *rtv, t_ray *ray, int i)
 				* rtv->shape[i].r));
 	temp_axel = minus_vectors(rtv->shape[i].cyl_h,
 			rtv->shape[i].pos);
-	if (cros_prdct(temp, temp_axel) < 0)
-		len *= -1.0;
 	axel_len = sqrt((cros_prdct(temp_axel, temp_axel)));
 	temp_axel = divide_vect_float(temp_axel, axel_len);
+	if (cros_prdct(divide_vect_float(temp, len), temp_axel) < 0)
+		len *= -1.0;
 	temp_axel = multiply_vect_float(temp_axel, len);
 	temp_axel = add_vectors(temp_axel, rtv->shape[i].pos);
+	
+	
 	normal = minus_vectors(ray->start, temp_axel);
 	normal = divide_vect_float(normal, sqrt((cros_prdct(normal, normal))));
 	return (normal);
@@ -74,13 +76,18 @@ t_vector	find_cone_normals(t_rtv *rtv, t_ray *ray, int i)
 	axel = minus_vectors(rtv->shape[i].cyl_h,
 			rtv->shape[i].pos);
 	axel_len = sqrt((cros_prdct(axel, axel)));
+	axel = divide_vect_float(axel, axel_len);
 	relative_r = (rtv->shape[i].r / axel_len);
-	temp = minus_vectors(ray->start, rtv->shape[i].pos);
+	temp = minus_vectors(ray->start, rtv->shape[i].cyl_h);
 	len = (sqrt(cros_prdct(temp, temp)));
-	len = sqrt((len * len) + ((len * relative_r) * (len * relative_r)));
-	axel.x = rtv->shape[i].pos.x + ((axel.x / axel_len) * len);
-	axel.y = rtv->shape[i].pos.y + ((axel.y / axel_len) * len);
-	axel.z = rtv->shape[i].pos.z + ((axel.z / axel_len) * len);
+	temp = divide_vect_float(temp, len);
+
+	axel_len = sqrt((len * len) + ((len * relative_r) * (len * relative_r)));
+	if (cros_prdct(axel, temp) < 0.0)
+		axel_len *= -1.0;
+	axel.x = rtv->shape[i].cyl_h.x + (axel.x * axel_len);
+	axel.y = rtv->shape[i].cyl_h.y + (axel.y * axel_len);
+	axel.z = rtv->shape[i].cyl_h.z + (axel.z * axel_len);
 	temp = minus_vectors(ray->start, axel);
 	temp = divide_vect_float(temp, sqrt((cros_prdct(temp, temp))));
 	return (temp);

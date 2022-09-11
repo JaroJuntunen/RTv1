@@ -1,7 +1,8 @@
-sphere 0.0.10 1 0xff000000
-sphere 0.1.10 1 0xff00ff00
-cone 0.10.10 0.0.10 1,2 0x0000ff00
-cone 10.0.10 0.0.10 1,2 0xff000000
-plane 0.0.50 0.0.1 0xffffff00
-plane 0.0.50 0.0.1 0xffffff00
+cone -10.10.10 0.0.10 1 0xff0fff00
+cone 6.11.10 4.4.9 1 0xff0fff00
+cone -1.0.7 6.2.10 1 0xff0fff00
+cylinder 1.2.7 6.2.10 0,1 0xfff2000
+cylinder -1.-5.7 6.2.10 0,1 0xf810ff00
+plane 0.0.20 0.0.1 0xff000f00
 light 0.0.0
+camera 0.0.0 0.0.10 0.10.0

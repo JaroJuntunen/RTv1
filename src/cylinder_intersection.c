@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 18:45:46 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/09 17:56:13 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/11 14:51:23 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ double	cylinder_intersection(t_ray *ray, t_rtv *rtv, int i)
 	if (cylinder.discr >= 0)
 	{
 		cylinder.discr = sqrt(cylinder.discr);
-		rtv->t[0] = (-cylinder.abc.y + cylinder.discr) / (2 * cylinder.abc.x);
-		rtv->t[1] = (-cylinder.abc.y - cylinder.discr) / (2 * cylinder.abc.x);
-		if (rtv->t[0] < rtv->t[1] && rtv->t[0] > (double)0)
+		rtv->t[0] = (-cylinder.abc.y - cylinder.discr) / (2 * cylinder.abc.x);
+		rtv->t[1] = (-cylinder.abc.y + cylinder.discr) / (2 * cylinder.abc.x);
+		if (rtv->t[0] < rtv->t[1] && rtv->t[0] >= (double)0)
 			return (rtv->t[0]);
 		else
 			return (rtv->t[1]);
