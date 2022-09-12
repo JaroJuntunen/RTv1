@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:28:21 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/11 14:18:47 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/12 16:03:12 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ double	sphere_intersection(t_ray *ray, t_rtv *rtv, int count)
 	double		ret;
 
 	w = minus_vectors(ray->start, rtv->shape[count].pos);
-	b = (2 * cros_prdct(ray->dir, w));
+	b = (2 * dot_prdct(ray->dir, w));
 	discr = (b * b);
-	discr -= (4 * cros_prdct(ray->dir, ray->dir) * (cros_prdct(w, w)
+	discr -= (4 * dot_prdct(ray->dir, ray->dir) * (dot_prdct(w, w)
 				- (rtv->shape[count].r * rtv->shape[count].r)));
 	if (discr >= 0)
 	{
 		discr = sqrt(discr);
-		rtv->t[0] = (-b - discr) / (2 * cros_prdct(ray->dir, ray->dir));
-		rtv->t[1] = (-b + discr) / (2 * cros_prdct(ray->dir, ray->dir));
+		rtv->t[0] = (-b - discr) / (2 * dot_prdct(ray->dir, ray->dir));
+		rtv->t[1] = (-b + discr) / (2 * dot_prdct(ray->dir, ray->dir));
 		if (rtv->t[0] < rtv->t[1] && rtv->t[0] >= (double)0)
 			ret = rtv->t[0];
 		else

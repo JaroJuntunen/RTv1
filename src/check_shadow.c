@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 19:19:11 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/11 18:32:21 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/12 17:15:54 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	offset_and_declare_shadow_ray(t_rtv *rtv, t_ray *ray)
 	ray->start = add_vectors(ray->start,
 			multiply_vect_float(ray->dir, rtv->clo_ret));
 	ray->dir = minus_vectors(rtv->light.pos, ray->start);
-	rtv->light.dist = sqrt((cros_prdct(ray->dir, ray->dir)));
+	rtv->light.dist = sqrt((dot_prdct(ray->dir, ray->dir)));
 	ray->dir = divide_vect_float(ray->dir, rtv->light.dist);
 	if (ft_strcmp(rtv->shape[rtv->clo_shape].type, "plane") == 0)
 		ofset_plane_dir(ray, rtv);
@@ -75,7 +75,6 @@ void	offset_and_declare_shadow_ray(t_rtv *rtv, t_ray *ray)
 	else
 		ofset_dir(ray, rtv);
 }
-
 
 int	check_shadow(t_ray *ray, t_rtv *rtv)
 {
@@ -90,10 +89,7 @@ int	check_shadow(t_ray *ray, t_rtv *rtv)
 		if (ft_strcmp(rtv->shape[count].type, "sphere") == 0)
 			ret = sphere_intersection(ray, rtv, count);
 		else if (ft_strcmp(rtv->shape[count].type, "cylinder") == 0)
-		{
 			ret = cylinder_intersection(ray, rtv, count);
-		//	printf("%f %f\n", rtv->clo_t[0], rtv->clo_t[1]);
-		}
 		else if (ft_strcmp(rtv->shape[count].type, "plane") == 0)
 			ret = plane_intersection(ray, rtv, count);
 		else if (ft_strcmp(rtv->shape[count].type, "cone") == 0)

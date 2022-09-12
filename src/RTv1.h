@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:36:07 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/09 17:56:13 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/12 16:03:12 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ typedef struct s_rtv
 	t_ray			*orig_ray;
 }					t_rtv;
 
-double		cros_prdct(t_vector a, t_vector b);
+double		dot_prdct(t_vector a, t_vector b);
 t_vector	divide_vectors(t_vector a, t_vector b);
 t_vector	multiply_vectors(t_vector a, t_vector b);
 t_vector	minus_vectors(t_vector a, t_vector b);

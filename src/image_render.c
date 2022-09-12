@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 21:13:13 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/11 19:55:47 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/12 16:03:12 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	creat_primary_ray(t_ray *ray, int x, int y, t_rtv *rtv)
 				((float)y * (rtv->camera.plane_h / WIN_H))));
 	ray->dir = minus_vectors(rtv->camera.pos, ray->dir);
 	ray->dir = divide_vect_float(ray->dir,
-			sqrt((cros_prdct(ray->dir, ray->dir))));
+			sqrt((dot_prdct(ray->dir, ray->dir))));
 	rtv->orig_ray = ray;
 }
 
@@ -50,8 +50,6 @@ int	ray_shooter(t_ray *ray, t_rtv *rtv)
 
 	count = 0;
 	rtv->clo_ret = -1.0;
-	rtv->clo_t[0] = -1.0;
-	rtv->clo_t[1] = -1.0;
 	while (count < rtv->shape_count)
 	{
 		ret = get_shape_intersections(ray, rtv, count);
@@ -76,14 +74,14 @@ int	ray_shooter(t_ray *ray, t_rtv *rtv)
 static void	creat_camera(t_rtv *rtv)
 {
 	rtv->camera.v_up = divide_vect_float(rtv->camera.v_up,
-			sqrt(cros_prdct(rtv->camera.v_up, rtv->camera.v_up)));
+			sqrt(dot_prdct(rtv->camera.v_up, rtv->camera.v_up)));
 	rtv->camera.n = minus_vectors(rtv->camera.pos, rtv->camera.coi);
 	rtv->camera.n = divide_vect_float(rtv->camera.n,
-			sqrt(cros_prdct(rtv->camera.n, rtv->camera.n)));
+			sqrt(dot_prdct(rtv->camera.n, rtv->camera.n)));
 	rtv->camera.n.z *= -1.0;
 	rtv->camera.u = cross_product(rtv->camera.n, rtv->camera.v_up);
 	rtv->camera.u = divide_vect_float(rtv->camera.u,
-			sqrt(cros_prdct(rtv->camera.u, rtv->camera.u)));
+			sqrt(dot_prdct(rtv->camera.u, rtv->camera.u)));
 	rtv->camera.v = cross_product(rtv->camera.u, rtv->camera.n);
 	rtv->camera.c = minus_vectors(rtv->camera.pos,
 			multiply_vect_float(rtv->camera.n, 0.1));
@@ -111,6 +109,8 @@ void	render_image(t_rtv	*rtv)
 		{
 			ray.start = rtv->camera.pos;
 			creat_primary_ray(&ray, x, y, rtv);
+			rtv->clo_t[0] = -1.0;
+			rtv->clo_t[1] = -1.0;
 			color = ray_shooter(&ray, rtv);
 			rtv->frame_buffer.data[((y * WIN_W) + x)] = color;
 			x++;

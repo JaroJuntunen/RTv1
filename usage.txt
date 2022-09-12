@@ -7,20 +7,23 @@
 		-camera position
 		-light and its properties and position
 
-	Example for everything you can put to the file.
+
+
+
+	Examples for everything you can put to the file.
 
 	As meny as you want in any combination.
 	{
-		sphere 0.0.10 2   0xffffff00
+		sphere 0.0.10   2   0xffffff00
 		       pos.     r.  color
 
-		plane 10.0.10 1.0.0  0xffffff00
+		plane 10.0.10   1.0.0   0xffffff00
 		      pos       dir     color
 
-		cylinder 0.0.10 10.0.1000 2  0xffffff00
+		cylinder 0.0.10   10.0.1000    2  0xffffff00
 		         srt.pos  heding.pos   r. color
 
-		cone 0.0.10 0.10.10 2 0xffffff00
+		cone  0.0.10  0.10.10   2  0xffffff00
 		      srt.pos top.pos   r. color
 	}
 
@@ -32,3 +35,6 @@
 		camera 0.0.0 0.0.10             0.10.0
 		       pos.  point of intres.    world up.
 	}
+
+	to Exit press ( esc )
+	to reload image ( r )

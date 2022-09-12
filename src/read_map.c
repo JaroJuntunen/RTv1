@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:23:19 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/09 18:26:06 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/12 15:29:36 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,8 @@ static int	is_line_valid(char *line)
 		if (strcmp(line_arg[0], "cone") == 0)
 			if (check_cone(line_arg) == 1)
 				ret = 1;
-		ft_arrdel(line_arg);
 	}
-	else
-		ft_arrdel(line_arg);
+	ft_arrdel(line_arg);
 	return (ret);
 }
 
