@@ -6,11 +6,16 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:36:09 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/12 15:29:51 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/14 18:23:06 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RTv1.h"
+
+/*
+** draw_to_window is using previously created texture to render the image to
+** winndow at the start and also when refresed.
+*/
 
 void	draw_to_window(t_rtv *rtv)
 {
@@ -31,6 +36,11 @@ void	draw_to_window(t_rtv *rtv)
 	}
 	SDL_RenderPresent(rtv->ren);
 }
+
+/*
+** rtv_loop_and_exit is keeping the window open and waitting for imput to
+** reload or exit the program.
+*/
 
 void	rtv_loop_and_exit(t_rtv	*rtv)
 {
@@ -56,6 +66,11 @@ void	rtv_loop_and_exit(t_rtv	*rtv)
 	free(rtv->frame_buffer.data);
 	free(rtv->shape);
 }
+
+/*
+** create_rtv_struct initialise main struct in the begining and some basic
+** values for the light and camera if they are not given inside the file.
+*/
 
 int	create_rtv_struct(t_rtv	*rtv)
 {
@@ -84,6 +99,11 @@ int	create_rtv_struct(t_rtv	*rtv)
 	rtv->camera.v_up.z = 0.0;
 	return (1);
 }
+
+/*
+** Print_usage prints usage.txt file if there is no arguments or there is to
+** many arguments given.
+*/
 
 void	print_usage(void)
 {

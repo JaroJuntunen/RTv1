@@ -6,11 +6,15 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 21:13:13 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/12 16:03:12 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/14 18:32:57 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RTv1.h"
+
+/*
+** initialice the primery ray from the camera to the pixel.
+*/
 
 void	creat_primary_ray(t_ray *ray, int x, int y, t_rtv *rtv)
 {
@@ -43,6 +47,12 @@ double	get_shape_intersections(t_ray *ray, t_rtv *rtv, int count)
 	return (ret);
 }
 
+/*
+** ray_shooter and get_shape_intersection both are combined to find all
+** intersections whit in the path of the primery ray and gets closet one
+** to check for the colors and shadows.
+*/
+
 int	ray_shooter(t_ray *ray, t_rtv *rtv)
 {
 	double	ret;
@@ -70,6 +80,9 @@ int	ray_shooter(t_ray *ray, t_rtv *rtv)
 		return (0x00000000);
 	return (get_color(rtv, ray));
 }
+/*
+** initialise the camera position, direction and upsidi of the camera.
+*/
 
 static void	creat_camera(t_rtv *rtv)
 {
@@ -92,6 +105,10 @@ static void	creat_camera(t_rtv *rtv)
 	rtv->camera.l = minus_vectors(rtv->camera.l,
 			multiply_vect_float(rtv->camera.v, rtv->camera.plane_h / 2.0));
 }
+
+/*
+** gos true all the pixels and finds the color for them.
+*/
 
 void	render_image(t_rtv	*rtv)
 {

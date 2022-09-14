@@ -6,11 +6,16 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 20:22:17 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/12 16:03:12 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/14 18:34:50 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RTv1.h"
+
+/*
+** Fix_normal is checking and fixing(if nesesery) the normal to be in correct
+** direction. So the imput dosen't need to be perfect.
+*/
 
 void	fix_normal(t_ray *ray, t_rtv *rtv, int count)
 {

@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:36:07 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/12 16:03:12 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:50:49 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 # define RTV1_H
 
 # include "libft/libft.h"
-# include <mlx.h>
 # include <fcntl.h>
 # include <math.h>
-# include <stdio.h>
 # include "../build/libsdl2/include/SDL2/SDL.h"
 
 # define WIN_W 1000
@@ -47,6 +45,7 @@ typedef struct s_shape
 	union u_color	color;
 	union u_color	temp_color;
 	t_vector		temp_norm;
+	int				in_shape;
 }					t_shape;
 
 typedef struct s_light
@@ -119,6 +118,7 @@ t_vector	multiply_vect_float(t_vector a, double b);
 t_vector	cross_product(t_vector a, t_vector b);
 t_vector	divide_vect_float(t_vector a, double b);
 void		find_normal(t_ray *ray, t_rtv *rtv, int i);
+int			is_iside_cone(t_ray *ray, t_rtv *rtv);
 
 void		render_image(t_rtv	*rtv);
 

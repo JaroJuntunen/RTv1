@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 18:19:26 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/12 17:14:27 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/14 18:28:44 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	color_shade(t_rtv *rtv, double temp, double dist)
 {
-	dist /= 10;
+	dist /= 20;
 	if (dist < 1)
 		dist = 1;
 	if (temp > 1.0)
@@ -28,6 +28,12 @@ void	color_shade(t_rtv *rtv, double temp, double dist)
 	rtv->shape[rtv->clo_shape].temp_color.rgba[2]
 		= (((int)rtv->shape[rtv->clo_shape].color.rgba[2] * (temp) / dist));
 }
+
+/*
+** If there is intersection whit object, this funcktion will calculate
+** shape surface normal and distanse to light and calculates the color
+** shade/intensity.
+*/
 
 int	get_color(t_rtv *rtv, t_ray *ray)
 {
@@ -43,10 +49,35 @@ int	get_color(t_rtv *rtv, t_ray *ray)
 		temp = dot_prdct(ray->dir, rtv->shape[rtv->clo_shape].normal);
 		if (temp < 0)
 			temp *= -1.0;
-		if (temp < 0)
-			return (0x00000000);
 		color_shade(rtv, temp, dist);
 		return (rtv->shape[rtv->clo_shape].temp_color.value);
 	}
 	return (0x00000000);
+}
+
+/*
+** This will check if the camera is inside the shape in question.
+*/
+
+int	is_iside_cone(t_ray *ray, t_rtv *rtv)
+{
+	t_vector	temp_t0;
+	t_vector	temp_t1;
+
+	rtv->shape[rtv->clo_shape].in_shape = 0;
+	temp_t0 = add_vectors(ray->dir,
+			multiply_vect_float(ray->dir, rtv->clo_t[0]));
+	temp_t1 = add_vectors(ray->dir,
+			multiply_vect_float(ray->dir, rtv->clo_t[1]));
+	temp_t0 = minus_vectors(rtv->shape[rtv->clo_shape].cyl_h, temp_t0);
+	temp_t1 = minus_vectors(rtv->shape[rtv->clo_shape].cyl_h, temp_t1);
+	temp_t0 = divide_vect_float(temp_t0, sqrt((dot_prdct(temp_t0, temp_t0))));
+	temp_t1 = divide_vect_float(temp_t1, sqrt((dot_prdct(temp_t1, temp_t1))));
+	if ((dot_prdct(temp_t0, temp_t1) < 0)
+		|| (rtv->clo_t[0] < 0.0 && rtv->clo_t[1] > 0.0))
+	{
+		rtv->shape[rtv->clo_shape].in_shape = 1;
+		return (1);
+	}
+	return (0);
 }
