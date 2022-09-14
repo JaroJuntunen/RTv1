@@ -2,5 +2,5 @@ cylinder 1.0.110 0.0.100 10 0xff00ff00
 sphere 0.0.100 4 0xff000000
 cylinder 0.0.105 10.10.105 2 0x0f0ff000
 cylinder 0.0.105 -10.10.105 2 0x0f0ff000
-light 0.0.88
+light 0.0.90
 camera 0.0.0 0.0.10 0.10.0
