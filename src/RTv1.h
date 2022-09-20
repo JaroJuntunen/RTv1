@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:36:07 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/13 16:50:49 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/20 15:16:11 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <math.h>
 # include "../build/libsdl2/include/SDL2/SDL.h"
 
-# define WIN_W 1000
-# define WIN_H 750
+# define WIN_W 1920
+# define WIN_H 1080
 # define MAX_SHAPES 100
 
 union	u_color
@@ -38,7 +38,10 @@ typedef struct s_vector
 typedef struct s_shape
 {
 	char			*type;
+	t_vector		orig_pos;
+	t_vector		transl;
 	t_vector		pos;
+	t_vector		orig_cyl_h;
 	t_vector		cyl_h;
 	double			r;
 	t_vector		normal;
