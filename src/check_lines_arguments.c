@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 14:59:58 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/07 17:16:38 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/20 15:05:22 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,22 @@ int	check_coordinates_and_directions(char *arg)
 
 	count = 0;
 	i = 0;
-	while (arg[i] != '\0')
+	if ((arg[i] <= '9' && arg[i] >= '0' ) || arg[i] == '-')
 	{
-		if ((arg[i] >= '0' && arg[i] <= '9' ) || arg[i] == ',' || arg[i] == '-')
-			i++;
-		else if (arg[i] == '.' && ((arg[i + 1] >= '0' && arg[i + 1] <= '9')
-				|| arg[i + 1] == '-'))
+		while (arg[i] != '\0')
 		{
-			count++;
-			i++;
+			if ((arg[i] >= '0' && arg[i] <= '9' )
+				|| arg[i] == ',' || arg[i] == '-')
+				i++;
+			else if (arg[i] == '.' && ((arg[i + 1] >= '0' && arg[i + 1] <= '9')
+					|| arg[i + 1] == '-'))
+			{
+				count++;
+				i++;
+			}
+			else
+				return (0);
 		}
-		else
-			return (0);
 	}
 	if (count == 2)
 		return (1);

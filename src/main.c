@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:36:09 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/14 18:23:06 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/20 15:02:09 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,8 @@ void	rtv_loop_and_exit(t_rtv	*rtv)
 			if (rtv->event.type == SDL_KEYDOWN)
 				if (rtv->event.key.keysym.sym == SDLK_ESCAPE)
 					quit = 1;
-			if (rtv->event.type == SDL_KEYDOWN)
-				if (rtv->event.key.keysym.sym == SDLK_r)
-					draw_to_window(rtv);
 		}
+		draw_to_window(rtv);
 	}
 	SDL_DestroyTexture(rtv->texture);
 	SDL_DestroyWindow(rtv->win);

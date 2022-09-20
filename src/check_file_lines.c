@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 17:30:42 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/07 16:55:12 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/20 11:56:11 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,15 @@ int	check_sphere(char **line_arg)
 	i = 0;
 	while (line_arg[i] != NULL)
 		i++;
-	if (i != 4)
+	if (i != 5)
 		return (-1);
 	if (check_coordinates_and_directions(line_arg[1]) == 0)
 		return (-1);
-	if (check_r(line_arg[2]) == 0)
+	if (check_coordinates_and_directions(line_arg[2]) == 0)
 		return (-1);
-	if (check_color(line_arg[3]) == 0)
+	if (check_r(line_arg[3]) == 0)
+		return (-1);
+	if (check_color(line_arg[4]) == 0)
 		return (-1);
 	return (1);
 }
@@ -37,13 +39,15 @@ int	check_plane(char **line_arg)
 	i = 0;
 	while (line_arg[i] != NULL)
 		i++;
-	if (i != 4)
+	if (i != 5)
 		return (-1);
 	if (check_coordinates_and_directions(line_arg[1]) == 0)
 		return (-1);
 	if (check_coordinates_and_directions(line_arg[2]) == 0)
 		return (-1);
-	if (check_color(line_arg[3]) == 0)
+	if (check_coordinates_and_directions(line_arg[3]) == 0)
+		return (-1);
+	if (check_color(line_arg[4]) == 0)
 		return (-1);
 	return (1);
 }
@@ -55,15 +59,17 @@ int	check_cylinder(char **line_arg)
 	i = 0;
 	while (line_arg[i] != NULL)
 		i++;
-	if (i != 5)
+	if (i != 6)
 		return (-1);
 	if (check_coordinates_and_directions(line_arg[1]) == 0)
 		return (-1);
 	if (check_coordinates_and_directions(line_arg[2]) == 0)
 		return (-1);
-	if (check_r(line_arg[3]) == 0)
+	if (check_coordinates_and_directions(line_arg[3]) == 0)
 		return (-1);
-	if (check_color(line_arg[4]) == 0)
+	if (check_r(line_arg[4]) == 0)
+		return (-1);
+	if (check_color(line_arg[5]) == 0)
 		return (-1);
 	return (1);
 }
@@ -75,15 +81,17 @@ int	check_cone(char **line_arg)
 	i = 0;
 	while (line_arg[i] != NULL)
 		i++;
-	if (i != 5)
+	if (i != 6)
 		return (-1);
 	if (check_coordinates_and_directions(line_arg[1]) == 0)
 		return (-1);
 	if (check_coordinates_and_directions(line_arg[2]) == 0)
 		return (-1);
-	if (check_r(line_arg[3]) == 0)
+	if (check_coordinates_and_directions(line_arg[3]) == 0)
 		return (-1);
-	if (check_color(line_arg[4]) == 0)
+	if (check_r(line_arg[4]) == 0)
+		return (-1);
+	if (check_color(line_arg[5]) == 0)
 		return (-1);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 21:13:13 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/14 18:32:57 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/20 16:19:30 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	ray_shooter(t_ray *ray, t_rtv *rtv)
 		}
 		count++;
 	}
-	if (rtv->clo_ret == -1 || ((rtv->clo_ret > 0.0)
+	if (rtv->clo_ret == -1 || (((rtv->clo_ret > 0.0))
 			&& (check_shadow(ray, rtv) == 1)))
 		return (0x00000000);
 	return (get_color(rtv, ray));
@@ -104,6 +104,12 @@ static void	creat_camera(t_rtv *rtv)
 			multiply_vect_float(rtv->camera.u, (rtv->camera.plane_w / 2.0)));
 	rtv->camera.l = minus_vectors(rtv->camera.l,
 			multiply_vect_float(rtv->camera.v, rtv->camera.plane_h / 2.0));
+	if (dot_prdct(rtv->camera.v_up, rtv->camera.u) == 1)
+	{
+		rtv->camera.v_up.x += 0.00001;
+		rtv->camera.v_up.y += 0.00001;
+		rtv->camera.v_up.z += 0.00001;
+	}
 }
 
 /*
