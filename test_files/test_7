@@ -1,12 +1,11 @@
-plane 0.0.0 0.1.0 0xfafafa00
-plane 0.0.25 0.0.1 0xfafffa00
-cone -4.0.-6 -2.0.12 1 0xffff0000
-cone -7.0.12 -7.6.12 2 0xf1003f00
-sphere 6.1.12 1 0xff000000
-sphere 4.0,3.11 0,3 0xff00f000
-sphere -4.3.10 0,5 0xff00f000
-sphere 0.5.20 3 0xff00f000
-cylinder 1.0.0 7.0.12 0,5 0x00f0ff00
-
+plane 0.0.0 0.0.0 0.1.0 0xfafafa00
+plane 0.0.25 0.0.0 0.0.1 0xfafffa00
+cone -4.0.-6 0.0.0 -2.0.12 1 0xffff0000
+cone -7.0.12 0.0.0 -7.6.12 2 0xf1003f00
+sphere 6.1.12 0.0.0 1 0xff000000
+sphere 4.0,3.11 0.0.0 0,3 0xff00f000
+sphere -4.3.10 0.0.0 0,5 0xff00f000
+sphere 0.5.20 0.0.0 3 0xff00f000
+cylinder 1.0.0 0.0.0 7.0.12 0,5 0x00f0ff00
 light 0.10.10
-camera 0.1.0 0.-1.10 0.10.0
+camera 0.1.0 0.-1.10 0.1.0

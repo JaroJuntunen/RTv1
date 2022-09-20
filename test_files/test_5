@@ -1,13 +1,13 @@
-cylinder 10.5.0 0.0.10 0,6 0xff00ff00
-cylinder -10.5.0 0.0.10 0,6 0xffff0000
-cylinder 7.-5.0 0.0.10 0,6 0xab42cd00
-cylinder -7.-5.-1 0.0.10 0,6 0x94fd2400
-sphere 0.0.10 2 0xff000000
-plane 10.0.10 1.0.0  0x1f1faf00
-plane -10.0.10 -1.0.0  0xf0f0f000
-plane 0.10.10 0.1.0  0xfa5df100
-plane 0.-10.10 0.-1.0  0x00faf500
-cone 0.10.10 0.0.10 1 0x0000ff00
-cone 10.0.10 0.0.10 1 0xff0ff000
+cylinder 10.5.0 0.0.0 0.0.10 0,6 0xff00ff00
+cylinder -10.5.0 0.0.0 0.0.10 0,6 0xffff0000
+cylinder 7.-5.0 0.0.0 0.0.10 0,6 0xab42cd00
+cylinder -7.-5.-1 0.0.0 0.0.10 0,6 0x94fd2400
+sphere 0.0.10 0.0.0 2 0xff000000
+plane 10.0.10 0.0.0 1.0.0  0x1f1faf00
+plane -10.0.10 0.0.0 -1.0.0  0xf0f0f000
+plane 0.10.10 0.0.0 0.1.0  0xfa5df100
+plane 0.-10.10 0.0.0 0.-1.0  0x00faf500
+cone 0.10.10 0.0.0 0.0.10 1 0x0000ff00
+cone 10.0.10 0.0.0 0.0.10 1 0xff0ff000
 light 0.0.-15
 camera 0.0.-35 0.0.9 0.10.0

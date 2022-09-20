@@ -14,17 +14,17 @@
 
 	As meny as you want in any combination.
 	{
-		sphere 0.0.10   2   0xffffff00
-		       pos.     r.  color
+		sphere 0.0.10 0.0.10          2   0xffffff00
+		       pos.  transl.pos.     r.  color
 
-		plane 10.0.10   1.0.0   0xffffff00
-		      pos       dir     color
+		plane 10.0.10  0.0.10  1.0.0   0xffffff00
+		      pos      transl.pos.    dir     color
 
-		cylinder 0.0.10   10.0.1000    2  0xffffff00
-		         srt.pos  heding.pos   r. color
+		cylinder 0.0.10  0.0.10      10.0.1000  2  0xffffff00
+		         srt.pos transl.pos. heding.pos   r. color
 
-		cone  0.0.10  0.10.10   2  0xffffff00
-		      srt.pos top.pos   r. color
+		cone  0.0.10   0.0.10       0.10.10  2  0xffffff00
+		      srt.pos  transl.pos.  top.pos  r. color
 	}
 
 	Onely one per file.
@@ -37,4 +37,3 @@
 	}
 
 	to Exit press ( esc )
-	to reload image ( r )
