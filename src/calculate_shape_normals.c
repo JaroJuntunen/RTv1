@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/23 19:37:40 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/20 15:56:50 by jjuntune         ###   ########.fr       */
+/*   Created: 2022/09/22 18:34:34 by jjuntune          #+#    #+#             */
+/*   Updated: 2022/09/22 19:22:37 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,19 @@ t_vector	find_sphere_normal(t_rtv *rtv, t_ray *ray, int i)
 
 t_vector	find_cylinder_normal(t_rtv *rtv, t_ray *ray, int i)
 {
+	t_vector	result;
+	t_vector	hypotenuse;
+	t_vector	hit_along_cyldir;
 	t_vector	temp;
-	t_vector	temp_axel;
-	t_vector	normal;
-	double		len;
-	double		axel_len;
 
-	temp = minus_vectors(ray->start, rtv->shape[i].pos);
-	len = ((dot_prdct(temp, temp)));
-	len = sqrt(len - (rtv->shape[i].r * rtv->shape[i].r));
-	temp_axel = minus_vectors(rtv->shape[i].cyl_h,
-			rtv->shape[i].pos);
-	axel_len = sqrt((dot_prdct(temp_axel, temp_axel)));
-	temp_axel = divide_vect_float(temp_axel, axel_len);
-	if (dot_prdct(divide_vect_float(temp, len), temp_axel) < 0)
-		len *= -1.0;
-	temp_axel = multiply_vect_float(temp_axel, len);
-	temp_axel = add_vectors(rtv->shape[i].pos, temp_axel);
-	normal = minus_vectors(ray->start, temp_axel);
-	normal = divide_vect_float(normal, sqrt((dot_prdct(normal, normal))));
-	return (normal);
+	hypotenuse = minus_vectors(ray->start, rtv->shape[rtv->clo_shape].pos);
+	temp = minus_vectors(rtv->shape[i].cyl_h, rtv->shape[i].pos);
+	temp = divide_vect_float(temp, sqrt(dot_prdct(temp, temp)));
+	hit_along_cyldir = add_vectors(rtv->shape[rtv->clo_shape].pos,
+			multiply_vect_float(temp, dot_prdct(hypotenuse, temp)));
+	result = minus_vectors(ray->start, hit_along_cyldir);
+	result = divide_vect_float(result, sqrt(dot_prdct(result, result)));
+	return (result);
 }
 
 t_vector	find_plane_normals(t_rtv *rtv, int i)

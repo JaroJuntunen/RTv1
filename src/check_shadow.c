@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 19:19:11 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/20 16:12:55 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/22 17:53:28 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ofset_dir(t_ray *ray, t_rtv *rtv)
 {
 	double	ofset_dist;
 
-	ofset_dist = 0.00001;
+	ofset_dist = 0.0001;
 	ray->start.x += rtv->shape[rtv->clo_shape].normal.x * ofset_dist;
 	ray->start.y += rtv->shape[rtv->clo_shape].normal.y * ofset_dist;
 	ray->start.z += rtv->shape[rtv->clo_shape].normal.z * ofset_dist;
@@ -31,7 +31,7 @@ void	ofset_plane_dir(t_ray *ray, t_rtv *rtv)
 {
 	double	ofset_dist;
 
-	ofset_dist = 0.000001;
+	ofset_dist = 0.0001;
 	ray->start.x -= rtv->shape[rtv->clo_shape].cyl_h.x * ofset_dist;
 	ray->start.y -= rtv->shape[rtv->clo_shape].cyl_h.y * ofset_dist;
 	ray->start.z -= rtv->shape[rtv->clo_shape].cyl_h.z * ofset_dist;
@@ -41,7 +41,7 @@ void	ofset_dir_inside(t_ray *ray)
 {
 	double	ofset_dist;
 
-	ofset_dist = 0.000001;
+	ofset_dist = 0.0001;
 	if (ray->dir.x > 0)
 		ray->start.x += ofset_dist;
 	else if (ray->dir.x < 0)

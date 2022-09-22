@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 21:13:13 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/20 16:19:30 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/22 19:17:55 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static void	creat_camera(t_rtv *rtv)
 	rtv->camera.n = minus_vectors(rtv->camera.pos, rtv->camera.coi);
 	rtv->camera.n = divide_vect_float(rtv->camera.n,
 			sqrt(dot_prdct(rtv->camera.n, rtv->camera.n)));
-	rtv->camera.n.z *= -1.0;
+	rtv->camera.n = divide_vect_float(rtv->camera.n, -1.0);
 	rtv->camera.u = cross_product(rtv->camera.n, rtv->camera.v_up);
 	rtv->camera.u = divide_vect_float(rtv->camera.u,
 			sqrt(dot_prdct(rtv->camera.u, rtv->camera.u)));
