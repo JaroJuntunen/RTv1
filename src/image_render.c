@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 21:13:13 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/22 19:17:55 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/22 20:59:50 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	creat_primary_ray(t_ray *ray, int x, int y, t_rtv *rtv)
 	ray->dir = minus_vectors(rtv->camera.pos, ray->dir);
 	ray->dir = divide_vect_float(ray->dir,
 			sqrt((dot_prdct(ray->dir, ray->dir))));
-	rtv->orig_ray = ray;
 }
 
 double	get_shape_intersections(t_ray *ray, t_rtv *rtv, int count)

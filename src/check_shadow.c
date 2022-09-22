@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 19:19:11 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/22 17:53:28 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/22 21:06:25 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ofset_dir(t_ray *ray, t_rtv *rtv)
 {
 	double	ofset_dist;
 
-	ofset_dist = 0.0001;
+	ofset_dist = 0.00001;
 	ray->start.x += rtv->shape[rtv->clo_shape].normal.x * ofset_dist;
 	ray->start.y += rtv->shape[rtv->clo_shape].normal.y * ofset_dist;
 	ray->start.z += rtv->shape[rtv->clo_shape].normal.z * ofset_dist;
@@ -31,29 +31,10 @@ void	ofset_plane_dir(t_ray *ray, t_rtv *rtv)
 {
 	double	ofset_dist;
 
-	ofset_dist = 0.0001;
+	ofset_dist = 0.01;
 	ray->start.x -= rtv->shape[rtv->clo_shape].cyl_h.x * ofset_dist;
 	ray->start.y -= rtv->shape[rtv->clo_shape].cyl_h.y * ofset_dist;
 	ray->start.z -= rtv->shape[rtv->clo_shape].cyl_h.z * ofset_dist;
-}
-
-void	ofset_dir_inside(t_ray *ray)
-{
-	double	ofset_dist;
-
-	ofset_dist = 0.0001;
-	if (ray->dir.x > 0)
-		ray->start.x += ofset_dist;
-	else if (ray->dir.x < 0)
-		ray->start.x -= ofset_dist;
-	if (ray->dir.y > 0)
-		ray->start.y += ofset_dist;
-	else if (ray->dir.y < 0)
-		ray->start.y -= ofset_dist;
-	if (ray->dir.z > 0)
-		ray->start.z += ofset_dist;
-	else if (ray->dir.z < 0)
-		ray->start.z -= ofset_dist;
 }
 
 /*
@@ -62,7 +43,10 @@ void	ofset_dir_inside(t_ray *ray)
 
 void	offset_and_declare_shadow_ray(t_rtv *rtv, t_ray *ray)
 {
-	is_iside_cone(ray, rtv);
+	t_ray	orig;
+
+	orig.dir = ray->dir;
+	is_inside(ray, rtv);
 	ray->start = add_vectors(ray->start,
 			multiply_vect_float(ray->dir, rtv->clo_ret));
 	ray->dir = minus_vectors(rtv->light.pos, ray->start);
@@ -70,10 +54,11 @@ void	offset_and_declare_shadow_ray(t_rtv *rtv, t_ray *ray)
 	rtv->light.dist = sqrt((dot_prdct(ray->dir, ray->dir)));
 	ray->dir = divide_vect_float(ray->dir, rtv->light.dist);
 	find_normal(ray, rtv, rtv->clo_shape);
+	if (dot_prdct(orig.dir, rtv->shape[rtv->clo_shape].normal) > 0)
+		rtv->shape[rtv->clo_shape].normal
+			= multiply_vect_float(rtv->shape[rtv->clo_shape].normal, -1.0);
 	if (ft_strcmp(rtv->shape[rtv->clo_shape].type, "plane") == 0)
 		ofset_plane_dir(ray, rtv);
-	else if (rtv->shape[rtv->clo_shape].in_shape == 1)
-		ofset_dir_inside(ray);
 	else
 		ofset_dir(ray, rtv);
 }

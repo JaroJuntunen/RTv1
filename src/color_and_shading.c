@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 18:19:26 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/22 18:55:46 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/22 21:08:18 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void	color_shade(t_rtv *rtv, double temp, double dist)
 	if (dist < 1)
 		dist = 1;
 	rtv->shape[rtv->clo_shape].temp_color.rgba[0]
-		= (((int)rtv->shape[rtv->clo_shape].color.rgba[0] * temp / dist));
+		= ((((int)rtv->shape[rtv->clo_shape].color.rgba[0] * temp) / dist));
 	rtv->shape[rtv->clo_shape].temp_color.rgba[1]
-		= (((int)rtv->shape[rtv->clo_shape].color.rgba[1] * temp / dist));
+		= ((((int)rtv->shape[rtv->clo_shape].color.rgba[1] * temp) / dist));
 	rtv->shape[rtv->clo_shape].temp_color.rgba[2]
-		= (((int)rtv->shape[rtv->clo_shape].color.rgba[2] * temp / dist));
+		= ((((int)rtv->shape[rtv->clo_shape].color.rgba[2] * temp) / dist));
 	rtv->shape[rtv->clo_shape].temp_color.rgba[3]
-		= (((int)rtv->shape[rtv->clo_shape].color.rgba[3] * temp / dist));
+		= ((((int)rtv->shape[rtv->clo_shape].color.rgba[3] * temp) / dist));
 }
 
 /*
@@ -39,12 +39,11 @@ int	get_color(t_rtv *rtv, t_ray *ray)
 	double		dist;
 	t_vector	to_light;
 
-	find_normal(ray, rtv, rtv->clo_shape);
 	to_light = minus_vectors(ray->start, rtv->light.pos);
 	dist = sqrt((dot_prdct(to_light, to_light)));
 	temp = dot_prdct(ray->dir, rtv->shape[rtv->clo_shape].normal);
 	if (temp < 0)
-		temp *= -1.0;
+		return (0x00000000);
 	color_shade(rtv, temp, dist);
 	return (rtv->shape[rtv->clo_shape].temp_color.value);
 }
@@ -53,7 +52,7 @@ int	get_color(t_rtv *rtv, t_ray *ray)
 ** This will check if the camera is inside the shape in question.
 */
 
-int	is_iside_cone(t_ray *ray, t_rtv *rtv)
+int	is_inside(t_ray *ray, t_rtv *rtv)
 {
 	t_vector	temp_t0;
 	t_vector	temp_t1;

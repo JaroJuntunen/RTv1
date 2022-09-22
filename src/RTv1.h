@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 18:36:07 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/20 15:16:11 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/22 20:17:43 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ typedef struct s_rtv
 	double			clo_t[2];
 	int				shape_count;
 	double			len;
-	t_ray			*orig_ray;
 }					t_rtv;
 
 double		dot_prdct(t_vector a, t_vector b);
@@ -121,7 +120,7 @@ t_vector	multiply_vect_float(t_vector a, double b);
 t_vector	cross_product(t_vector a, t_vector b);
 t_vector	divide_vect_float(t_vector a, double b);
 void		find_normal(t_ray *ray, t_rtv *rtv, int i);
-int			is_iside_cone(t_ray *ray, t_rtv *rtv);
+int			is_inside(t_ray *ray, t_rtv *rtv);
 
 void		render_image(t_rtv	*rtv);
 
