@@ -1,8 +1,8 @@
-cone -10.10.10 0.0.0 0.0.10 1 0xff0fff00
-cone 6.11.10 0.0.0 4.4.9 1 0xff0fff00
-cone -1.0.7 0.0.0 6.2.10 1 0xff0fff00
-cylinder 1.2.7 0.0.0 6.2.10 0,1 0xfff2000
-cylinder -1.-5.7 0.0.0 6.2.10 0,1 0xf810ff00
-plane 0.0.20 0.0.0 0.0.1 0xff000f00
+cone -10.10.10 0.0.0 0.0.10 1 0xff0fff
+cone 6.11.10 0.0.0 4.4.9 1 0xff0fff
+cone -1.0.7 0.0.0 6.2.10 1 0xff0fff
+cylinder 1.2.7 0.0.0 6.2.10 0,1 0xfff20
+cylinder -1.-5.7 0.0.0 6.2.10 0,1 0xf810ff
+plane 0.0.20 0.0.0 0.0.1 0xff000f
 light 0.0.0
 camera 0.0.0 0.0.10 0.10.0

@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 18:45:46 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/22 20:44:35 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/23 18:58:22 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void	get_abc(t_ray *ray, t_rtv *rtv, t_shape_calc	*cylinder, int i)
 {
+	double	angle_test;
+
 	cylinder->abc.x = (dot_prdct(ray->dir, ray->dir)
 			- (dot_prdct(ray->dir, cylinder->h)
 				* dot_prdct(ray->dir, cylinder->h)));
@@ -24,6 +26,9 @@ static void	get_abc(t_ray *ray, t_rtv *rtv, t_shape_calc	*cylinder, int i)
 			- (dot_prdct(cylinder->w, cylinder->h)
 				* dot_prdct(cylinder->w, cylinder->h))
 			- (rtv->shape[i].r * rtv->shape[i].r));
+	angle_test = dot_prdct(cylinder->h, rtv->camera.n);
+	if (angle_test == -1.0 || angle_test == 1)
+		rtv->shape[i].cyl_h.x -= 0.00000000001;
 }
 
 double	cylinder_intersection(t_ray *ray, t_rtv *rtv, int i)

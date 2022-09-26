@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 14:59:58 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/20 15:05:22 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/23 19:09:45 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	check_color(char *arg)
 		else
 			return (0);
 	}
-	if (count == 1)
+	if (count == 1 && i == 8)
 		return (1);
 	return (0);
 }
