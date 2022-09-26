@@ -6,7 +6,7 @@
 /*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 21:13:13 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/23 17:24:19 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/09/26 11:11:50 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,17 @@ int	ray_shooter(t_ray *ray, t_rtv *rtv)
 
 static void	creat_camera(t_rtv *rtv)
 {
+	double	angle;
+
 	rtv->camera.v_up = divide_vect_float(rtv->camera.v_up,
 			sqrt(dot_prdct(rtv->camera.v_up, rtv->camera.v_up)));
 	rtv->camera.n = minus_vectors(rtv->camera.pos, rtv->camera.coi);
 	rtv->camera.n = divide_vect_float(rtv->camera.n,
 			sqrt(dot_prdct(rtv->camera.n, rtv->camera.n)));
 	rtv->camera.n = divide_vect_float(rtv->camera.n, -1.0);
+	angle = dot_prdct(rtv->camera.v_up, rtv->camera.n);
+	if (angle == 1 || angle == -1)
+		rtv->camera.v_up = add_vect_float(rtv->camera.v_up, 0.001);
 	rtv->camera.u = cross_product(rtv->camera.n, rtv->camera.v_up);
 	rtv->camera.u = divide_vect_float(rtv->camera.u,
 			sqrt(dot_prdct(rtv->camera.u, rtv->camera.u)));
@@ -103,12 +108,6 @@ static void	creat_camera(t_rtv *rtv)
 			multiply_vect_float(rtv->camera.u, (rtv->camera.plane_w / 2.0)));
 	rtv->camera.l = minus_vectors(rtv->camera.l,
 			multiply_vect_float(rtv->camera.v, rtv->camera.plane_h / 2.0));
-	if (dot_prdct(rtv->camera.v_up, rtv->camera.u) == 1)
-	{
-		rtv->camera.v_up.x += 0.00001;
-		rtv->camera.v_up.y += 0.00001;
-		rtv->camera.v_up.z += 0.00001;
-	}
 }
 
 /*
